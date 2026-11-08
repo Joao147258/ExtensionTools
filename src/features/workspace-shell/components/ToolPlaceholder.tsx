@@ -1,19 +1,21 @@
 import type { ReactNode } from 'react';
+import { Badge, Panel } from '../../../shared/ui';
 
 /**
  * ==============================================================================
  * Projeto: ExtensionTools
  * Módulo: src/features/workspace-shell/components/ToolPlaceholder.tsx
- * Responsabilidade: Representação provisória reutilizável para ferramentas em desenvolvimento.
+ * Responsabilidade: Representação integrada de ferramentas em desenvolvimento.
  *
  * Papel Arquitetural:
- * Componente genérico apresentacional (Reusable Presentational Component).
- * Evita a duplicação de páginas vazias para ferramentas ainda não construídas (DRY),
- * fornecendo feedback claro e acessível ao usuário dentro do Workspace Shell.
+ * Componente apresentacional reutilizável dentro do Workspace Shell.
+ * Integrado ao Design System do Bloco 2 através do consumo de Panel e Badge
+ * da API pública (src/shared/ui).
  *
  * Acessibilidade:
- * - Seção delimitada com `aria-label` contendo o nome da ferramenta.
- * - Tratamento de ícone opcional como elemento puramente decorativo (`aria-hidden="true"`).
+ * - Seção estrutural delimitada com `aria-label` contendo o nome da ferramenta.
+ * - Ícone tratado como elemento puramente decorativo (`aria-hidden="true"`).
+ * - Mensagem de status exibida via Badge semântico.
  * ==============================================================================
  */
 
@@ -41,29 +43,31 @@ export function ToolPlaceholder({
   icon,
 }: ToolPlaceholderProps) {
   return (
-    <section
+    <Panel
+      as="section"
       aria-label={name}
-      className="flex min-w-0 flex-col items-center justify-center rounded-lg border border-[#2B2B33] bg-[#1E1E22] px-6 py-10 text-center shadow-xs"
+      surface="secondary"
+      padding="lg"
+      className="flex min-w-0 flex-col items-center justify-center text-center shadow-xs"
     >
       {icon != null && (
         <div
           aria-hidden="true"
-          className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-[#2B2B33] bg-[#2B2B31] text-[#DF2531]"
+          className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-border-default bg-surface-elevated text-brand-primary"
         >
           {icon}
         </div>
       )}
 
-      <h2 className="text-base font-semibold tracking-tight text-white">{name}</h2>
+      <h2 className="text-base font-semibold tracking-tight text-text-primary">{name}</h2>
 
       {description && (
-        <p className="mt-2 max-w-sm text-xs leading-relaxed text-[#9CA3AF]">{description}</p>
+        <p className="mt-2 max-w-sm text-xs leading-relaxed text-text-secondary">{description}</p>
       )}
 
-      <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-[#2B2B33] bg-[#101013] px-3 py-1 text-xs font-medium text-[#DF2531]">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#DF2531]" aria-hidden="true" />
-        <span>{message}</span>
+      <div className="mt-4">
+        <Badge tone="danger">{message}</Badge>
       </div>
-    </section>
+    </Panel>
   );
 }

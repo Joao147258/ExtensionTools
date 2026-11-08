@@ -2,10 +2,10 @@
 
 > **Projeto:** ExtensionTools  
 > **Classificação:** PUBLIC REPOSITORY  
-> **Status Geral do Repositório:** **M2 HOMOLOGATED (COMPLETED WITH RESERVATIONS) — M3 ACTIVATED — PUBLICATION BLOCKED (SAFE-BY-DEFAULT)**  
+> **Status Geral do Repositório:** **M2 HOMOLOGATED — M3 IN PROGRESS (PHASE-1 / BLOCO 1 HOMOLOGADO COM RESERVAS — PHASE-2 / BLOCO 2 HOMOLOGADO — BLOCO 3 EM ANDAMENTO: B3-F01 CONCLUÍDA) — PUBLICATION BLOCKED (SAFE-BY-DEFAULT)**  
 > **Framework Base:** WXT + Manifest V3 + React 19 + TypeScript + Tailwind CSS  
 > **Documento Canônico de Governança de Progresso:** `status.md`  
-> **Última Atualização:** 07/11/2026  
+> **Última Atualização:** 08/11/2026  
 
 ---
 
@@ -15,7 +15,7 @@
   - [1. Situação Atual do Desenvolvimento](#1-situação-atual-do-desenvolvimento)
   - [2. Indicadores de Progresso](#2-indicadores-de-progresso)
   - [3. Linha do Tempo dos Milestones](#3-linha-do-tempo-dos-milestones)
-  - [4. Fase Ativa — O Que Precisa Ser Feito Agora (M3-PHASE-1 / Bloco 0)](#4-fase-ativa--o-que-precisa-ser-feito-agora-m3-phase-1--bloco-0)
+  - [4. Fase Ativa — O Que Precisa Ser Feito Agora (M3-PHASE-1 Homologada / M3-PHASE-2 Desbloqueada)](#4-fase-ativa--o-que-precisa-ser-feito-agora-m3-phase-1-homologada--m3-phase-2-desbloqueada)
   - [5. Histórico de Homologação do Milestone Concluído (M2)](#5-histórico-de-homologação-do-milestone-concluído-m2)
   - [6. Gate de Transição — M2 → M3 e Desbloqueio da Plataforma](#6-gate-de-transição--m2--m3-e-desbloqueio-da-plataforma)
   - [7. Estruturação Operacional do Milestone Ativo — M3: Product Shell & Platform Foundation](#7-estruturação-operacional-do-milestone-ativo--m3-product-shell--platform-foundation)
@@ -46,26 +46,30 @@
 | Atributo | Estado Canônico Confirmado |
 | :--- | :--- |
 | **Milestone Atual** | **M3 — Product Shell & Platform Foundation** |
-| **Estado do Milestone** | `Em Execução (Bloco 0 e Bloco 1 concluídos; Pronto para Bloco 2)` |
-| **Fase Atual Executável** | **`M3-PHASE-2` — Design System Primitivo (`src/shared/ui/`)** |
-| **Fase Anterior Concluída** | `M3-PHASE-1` — Entrypoints WXT & Side Panel Shell (B1-F01 Workspace Shell e B1-F02 Tool Navigation concluídas e validadas) |
-| **Progresso de Fases em M3** | **1 de 5 fases concluídas** (*6 de 23 tarefas executadas: M3-P1-T01 a M3-P1-T06*) |
-| **Fases Restantes em M3** | 4 fases (`M3-PHASE-2` a `M3-PHASE-5`) |
-| **Próxima Ação Imediata** | Iniciar o **Bloco 2 de M3** (`M3-P2-T01` a `M3-P2-T06`: Design System Primitivo sob `src/shared/ui/`) |
+| **Estado do Milestone** | `Em Andamento (Bloco 0, Bloco 1 e Bloco 2 homologados; Bloco 3 em andamento com B3-F01 concluída; Blocos 4 e 5 pendentes)` |
+| **Fase Atual** | **`M3-PHASE-3` — Platform Messaging (Em Andamento — B3-F01 Concluída)** |
+| **Bloco Atual** | **Bloco 3 — Platform Messaging (B3-F01 Message Contracts implementada e validada)** |
+| **Atividade Atual** | **Conclusão e validação de B3-F01 (`contracts.ts`, `contracts.typecheck.ts`); preparação para B3-F02 (Messaging Client)** |
+| **Parecer Operacional Atual** | **`IN_PROGRESS`** (B3-F01 validada com 11 novos testes no Vitest [346 testes totais], typecheck rigoroso com `@ts-expect-error` e build WXT limpo) |
+| **Próxima Ação Prioritária (Unívoca)** | **Iniciar a implementação de B3-F02 (`M3-P3-T02` — Messaging Client e barramento tipado com timeout)** |
+| **Próxima Etapa Planejada** | **`M3-PHASE-3` / B3-F02 — Messaging Client (`src/platform/messaging/client.ts`)** |
+| **Condição de Avanço para Bloco 3** | **ATENDIDA** (Blocos 0, 1 e 2 homologados formalmente com evidências registradas; B3-F01 concluída) |
+| **Fases Concluídas / Homologadas em M3** | **2 de 5 fases homologadas** (`M3-PHASE-1` e `M3-PHASE-2` homologadas; `M3-PHASE-3` em andamento) |
+| **Blocos Homologados em M3** | **3 de 6 blocos homologados** (Bloco 0, Bloco 1 e Bloco 2 homologados; Bloco 3 em andamento; Blocos 4 e 5 pendentes) |
+| **Tarefas Homologadas em M3** | **13 de 23 tarefas concluídas** (`M3-P1-T01` a `M3-P1-T06`, `M3-P2-T01` a `M3-P2-T06` e `M3-P3-T01`) |
 | **Próximo Milestone** | **M4 — First Feature Pilot & Architecture Validation (Text Diff)** |
-| **Condição de Início de M3** | **Desbloqueado e Validado** (Baseline do Bloco 0 auditado; Parecer `READY_WITH_RESERVATIONS`) |
 | **Status de Publicação Externa** | **`BLOQUEADO`** *(Safe-by-default — Nenhum segredo ou push remoto até M8)* |
 
 ---
 
 ## 2. Indicadores de Progresso
 
-Os indicadores utilizam contagem simples auditada de fases e etapas. Não são utilizados percentuais arbitrários baseados em linhas de código.
+Os indicadores utilizam contagem simples auditada de fases e etapas. Não são utilizados percentuais arbitrários baseados em linhas de código. A conclusão de uma fase depende de evidências formais de homologação.
 
 ### 2.1. Progresso Geral de Milestones (M0 a M8)
 - **Milestones Totais:** 9 (M0 a M8)
-- **Milestones Concluídos:** 3 (M0, M1, M2)
-- **Milestone Ativo / Em Andamento:** 1 (M3 — Bloco 0 concluído; Pronto para início do Bloco 1)
+- **Milestones Concluídos / Homologados:** 3 (M0, M1, M2)
+- **Milestone Ativo / Em Andamento:** 1 (M3 — Bloco 1 homologado com reservas; Bloco 2 desbloqueado)
 - **Milestones Pendentes:** 5 (M4, M5, M6, M7, M8)
 - **Indicador Visual Geral:**  
   `[███░░░░░░] 3/9 Milestones concluídos (33.3%)`
@@ -82,16 +86,28 @@ Os indicadores utilizam contagem simples auditada de fases e etapas. Não são u
 
 ### 2.3. Progresso do Milestone Atual (M3 — Product Shell & Platform Foundation)
 - **Fases Totais:** 5 (`M3-PHASE-1` a `M3-PHASE-5`)
-- **Fases Concluídas:** 1 (20%) — `M3-PHASE-1` (Entrypoints WXT, Workspace Shell e Tool Navigation)
-- **Fases em Andamento / Pronta para Início:** 1 (`M3-PHASE-2`)
-- **Fases Pendentes:** 3 (`M3-PHASE-3`, `M3-PHASE-4`, `M3-PHASE-5`)
+- **Fases Homologadas:** 2 (40%) — *`M3-PHASE-1` e `M3-PHASE-2` homologadas com parecer favorável*
+- **Fases em Andamento / Desbloqueadas:** 1 (`M3-PHASE-3` — Bloco 3 em andamento)
+- **Fases Pendentes:** 2 (`M3-PHASE-4` e `M3-PHASE-5`)
+- **Blocos Totais:** 6 (Bloco 0 a Bloco 5)
+- **Blocos Homologados:** 3 (Bloco 0 — Baseline e Prontidão; Bloco 1 — WXT & Side Panel Shell; Bloco 2 — Design System Primitivo)
+- **Blocos em Andamento:** 1 (Bloco 3 — Platform Messaging: B3-F01 concluída)
+- **Blocos Pendentes / Bloqueados:** 2 (Blocos 4 e 5)
 - **Tarefas Totais de M3:** 23 tarefas planejadas
-- **Tarefas Concluídas:** 6 (26.1%) — Tarefas `M3-P1-T01` a `M3-P1-T06` concluídas
+- **Tarefas Concluídas / Homologadas:** 13 (56.5%) — `M3-P1-T01` a `M3-P1-T06`, `M3-P2-T01` a `M3-P2-T06` e `M3-P3-T01`
+- **Tarefas Pendentes:** 10 (43.5%) — Tarefas `M3-P3-T02` a `M3-P5-T04`
 - **Indicador Visual do Milestone:**  
-  `M3 — [███░░░░░░░░░] 1/5 Fases concluídas (6/23 tarefas)`
-- **Evidência de Planejamento:** [`docs/Relatorios/m3/planejamento/RELATORIO-ESTRUTURACAO-OPERACIONAL-M3.md`](docs/Relatorios/m3/planejamento/RELATORIO-ESTRUTURACAO-OPERACIONAL-M3.md)
+  `M3 — [█████░░░░░] 2/5 Fases homologadas (3 Blocos homologados; Bloco 3 em andamento; 13/23 tarefas concluídas, 10 pendentes)`
+- **Evidência de Planejamento de M3:** [`docs/Relatorios/m3/planejamento/RELATORIO-ESTRUTURACAO-OPERACIONAL-M3.md`](docs/Relatorios/m3/planejamento/RELATORIO-ESTRUTURACAO-OPERACIONAL-M3.md)
 - **Evidência do Baseline (Bloco 0):** [`docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md`](docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md)
-- **Evidência do Bloco 1 (Fase 1):** [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-F02-TOOL-NAVIGATION.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-F02-TOOL-NAVIGATION.md)
+- **Evidência da Homologação do Bloco 1:** [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-REVISAO-FINAL-BLOCO-1.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-REVISAO-FINAL-BLOCO-1.md)
+- **Evidência da Homologação do Bloco 2:** [`docs/Relatorios/m3/Bloco_2/RELATORIO-EXECUCAO-BLOCO-2.md`](docs/Relatorios/m3/Bloco_2/RELATORIO-EXECUCAO-BLOCO-2.md)
+- **Evidências de Implementação do Bloco 1:**  
+  - B1-F02: [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-F02-TOOL-NAVIGATION.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-F02-TOOL-NAVIGATION.md)  
+  - B1-C01: [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-C01-SIDEPANEL-APP.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-C01-SIDEPANEL-APP.md)  
+  - B1-S01: [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-S01-VISUAL-FOUNDATION.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-S01-VISUAL-FOUNDATION.md)  
+- **Evidências de Planejamento do Bloco 2:** [`docs/Relatorios/m3/Bloco_2/Planejamento/`](docs/Relatorios/m3/Bloco_2/Planejamento/) (12 relatórios técnicos)  
+
 
 ### 2.4. Progresso de Features de Produto
 - **Features Previstas:** 12 ferramentas analíticas e de produtividade
@@ -109,12 +125,19 @@ Os indicadores utilizam contagem simples auditada de fases e etapas. Não são u
 [M1: Architecture & Design] (CONCLUÍDO - Validado em ARCHITECTURE.md & DESIGN.md)
    │
    ▼
-[M2: Harness Engineering] (CONCLUÍDO - Homologado com ressalvas aceitas em H4; 155 testes)
+[M2: Harness Engineering] (CONCLUÍDO - Homologado com ressalvas em H4; 155 testes)
    │
-   ├─► [M3: Product Shell & Platform] (ATUAL / PRONTO P/ INÍCIO - Desbloqueado para Bloco 0)
+   ├─► [M3: Product Shell & Platform] (EM ANDAMENTO — Bloco 1 e 2 Homologados; Bloco 3 em Andamento)
+   │      │
+   │      ├── Bloco 0: Baseline & Tooling ────────► [HOMOLOGADO c/ reservas]
+   │      ├── Bloco 1: WXT & Side Panel Shell ────► [HOMOLOGADO c/ reservas]
+   │      ├── Bloco 2: Design System Primitivo ───► [HOMOLOGADO — 288 testes Vitest 100% aprovados]
+   │      ├── Bloco 3: Platform Messaging ────────► [EM ANDAMENTO — B3-F01 Concluída]
+   │      ├── Bloco 4: Platform Persistence ──────► [PENDENTE]
+   │      └── Bloco 5: Integração & Homologação ──► [PENDENTE]
    │      │
    │      ▼
-   │   [M4: Feature Piloto Text-Diff] (PENDENTE - Depende de M3 completo)
+   │   [M4: Feature Piloto Text-Diff] (PENDENTE - Depende de M3 completo e homologado)
    │      │
    │      ▼
    │   [M5: Core Features Catalogue] (PENDENTE - Depende de M4 validado)
@@ -131,57 +154,131 @@ Os indicadores utilizam contagem simples auditada de fases e etapas. Não são u
 
 ---
 
-## 4. Fase Ativa — O Que Precisa Ser Feito Agora (M3-PHASE-1 / Bloco 1)
+## 4. Fase Ativa — O Que Precisa Ser Feito Agora (M3-PHASE-1 / Bloco 1 — Revisão Final)
 
 ### 4.1. Ficha de Identificação da Fase
 - **Milestone:** M3 — Product Shell & Platform Foundation
 - **Código da Fase:** `M3-PHASE-1`
 - **Nome Oficial:** Entrypoints WXT & Side Panel Shell
-- **Bloco Atual:** **Bloco 1 — Estrutura WXT e Side Panel Shell (Fase 1)**
-- **Estado Atual:** `Pronto para início` (Bloco 0 concluído e homologado sob `READY_WITH_RESERVATIONS`)
-- **Objetivo Central:** Estabelecer a infraestrutura inicial de entrypoints do WXT para Manifest V3, inicializar o React 19 no Side Panel e estruturar a casca principal de layout (Header, Container Central, Status Bar) e alternador de workspaces.
-- **Dependências Técnicas:** M0, M1 e M2 concluídos; Bloco 0 de M3 auditado — *Todas atendidas*.
-- **Agentes Recomendados:** `Architect` / `Developer` / `Test Engineer` (Orquestração: `Orchestrator`).
+- **Bloco Atual:** **Bloco 1 — Entrypoints WXT e Estrutura Funcional do Side Panel**
+- **Estado Operacional Atual:** **`IN_REVIEW` (Implementação física concluída; auditoria e revisão consolidada em andamento)**
+- **Objetivo Central:** Estabelecer a infraestrutura de entrypoints do WXT para Manifest V3, inicializar o runtime React 19 no Side Panel, estruturar a casca permanente (Workspace Shell), a navegação entre ferramentas (Tool Navigation), a composição de aplicação com seleção unívoca (Side Panel Application) e os fundamentos visuais compartilhados (Visual Foundation).
+- **Dependências Técnicas:** M0, M1 e M2 concluídos; Bloco 0 de M3 homologado com reservas (`READY_WITH_RESERVATIONS`) — *Todas atendidas*.
+- **Agentes Recomendados:** `Architect` / `Developer` / `Test Engineer` / `Security Auditor` (Orquestração: `Orchestrator`).
 - **Quality Gates Aplicáveis:** `QG-01` (Repository Safety), `QG-02` (Architecture Boundaries), `QG-03` (Static Code Quality), `QG-04` (Automated Testing), `QG-08` (Build Integrity) e `QG-09` (Browser Permissions).
 
-### 4.2. Checklist Geral de Tarefas de M3
+---
 
-#### Fase 1: `M3-PHASE-1` — Entrypoints WXT & Side Panel Shell
-- [x] `M3-P1-T01` — Preparação do baseline de M3 e diagnóstico de compilação dos entrypoints WXT. *(Bloco 0 — Homologado em `docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md`)*
-- [x] `M3-P1-T02` — Estruturação física dos entrypoints WXT (`src/entrypoints/sidepanel/`, `background/`, `content/`). *(Bloco 1 — Homologado em B1-F01/B1-F02)*
-- [x] `M3-P1-T03` — Bootstrap e inicialização do runtime React 19 no Side Panel (`main.tsx`, `App.tsx`). *(Bloco 1 — Homologado em B1-F01/B1-F02)*
-- [x] `M3-P1-T04` — Implementação do layout principal do Side Panel (Header, Workspace Container, Status Bar) conforme `DESIGN.md`. *(Bloco 1 — Homologado em B1-F01)*
-- [x] `M3-P1-T05` — Implementação do mecanismo atômico de navegação e alternador de ferramentas no shell. *(Bloco 1 — Homologado em B1-F02)*
-- [x] `M3-P1-T06` — Validação de build WXT (`pnpm build`), verificação do Manifest V3 gerado e testes de renderização. *(Bloco 1 — Homologado em B1-F01/B1-F02)*
+### 4.2. Matriz dos Entregáveis Arquiteturais do Bloco 1
 
-#### Fase 2: `M3-PHASE-2` — Design System Primitivo (`src/shared/ui/`)
-- [ ] `M3-P2-T01` — Configuração e validação dos tokens visuais Tailwind CSS (paleta `#101013`, `#1E1E22`, `#DF2531`, tipografia). *(Bloco 2)*
-- [ ] `M3-P2-T02` — Implementação do componente atômico `Button` (Primary, Secondary, Ghost, Destructive e foco acessível). *(Bloco 2)*
-- [ ] `M3-P2-T03` — Implementação dos componentes de formulário `Input`, `Textarea` e `Select` acessíveis. *(Bloco 2)*
-- [ ] `M3-P2-T04` — Implementação dos componentes estruturais `Card`, `Panel` e `Badge`. *(Bloco 2)*
-- [ ] `M3-P2-T05` — Implementação do catálogo de ícones e indicadores de estado (`Icon`, `LoadingSpinner`, `EmptyState`). *(Bloco 2)*
-- [ ] `M3-P2-T06` — Suíte de testes unitários de renderização e conformidade de contraste WCAG 2.2 AA dos componentes primitivos. *(Bloco 2)*
+A decomposição arquitetural do Bloco 1 estrutura-se em 6 entregáveis fundamentais. Todos tiveram sua implementação física concluída, revisada, corrigida e **Homologada com Reservas**:
 
-#### Fase 3: `M3-PHASE-3` — Platform Messaging Fortemente Tipado (`src/platform/messaging/`)
-- [ ] `M3-P3-T01` — Definição dos contratos e esquemas tipados de mensagens entre Side Panel, Background e Content Scripts. *(Bloco 3)*
-- [ ] `M3-P3-T02` — Implementação do barramento de envio tipado (`sendMessage`) com timeout e tratamento fail-safe. *(Bloco 3)*
-- [ ] `M3-P3-T03` — Implementação do despachante e receptor de mensagens (`onMessage`) com validação de payload. *(Bloco 3)*
-- [ ] `M3-P3-T04` — Suíte de testes unitários e mocks determinísticos do barramento de mensageria com Vitest. *(Bloco 3)*
+| ID | Entregável Arquitetural | Responsabilidade Principal | Arquivos e Módulos Principais | Evidências e Testes | Estado Operacional |
+| :---: | :--- | :--- | :--- | :--- | :---: |
+| **B1-I01** | WXT Side Panel Entrypoint | Inicialização do runtime React 19 e montagem do container HTML | [`src/entrypoints/sidepanel/index.html`](src/entrypoints/sidepanel/index.html), [`main.tsx`](src/entrypoints/sidepanel/main.tsx), [`App.tsx`](src/entrypoints/sidepanel/App.tsx) | Reconhecimento pelo WXT, build em `.output/chrome-mv3/sidepanel.html`, teste de integração `sidepanel-app.test.tsx` | **`Homologado`** |
+| **B1-I02** | Browser Panel Integration | Configuração de integração nativa Chromium Side Panel e Manifest V3 | [`wxt.config.ts`](wxt.config.ts), `src/entrypoints/background/index.ts`, `.output/chrome-mv3/manifest.json` | Manifest V3 gerado com `"sidePanel"`, `side_panel: {"default_path": "sidepanel.html"}`, Action API e teste `browser-panel.test.ts` | **`Homologado`** |
+| **B1-F01** | Workspace Shell | Casca estrutural visual permanente (Header, Content container, ErrorBoundary) | [`src/features/workspace-shell/`](src/features/workspace-shell/) (`WorkspaceShell.tsx`, `WorkspaceHeader.tsx`, `WorkspaceContent.tsx`, `ToolPlaceholder.tsx`, `RenderErrorBoundary.tsx`) | 3 suítes Vitest com 11 testes unitários (`WorkspaceShell.test.tsx`, `ToolPlaceholder.test.tsx`, `RenderErrorBoundary.test.tsx`) | **`Homologado`** |
+| **B1-F02** | Tool Navigation | Navegação atômica, controlada e acessível entre ferramentas | [`src/features/tool-navigation/`](src/features/tool-navigation/) (`ToolNavigation.tsx`, `NavigationItem.tsx`, `navigation.types.ts`) | Suíte Vitest com 6 testes unitários (`ToolNavigation.test.tsx`), relatório emitido | **`Homologado`** |
+| **B1-C01** | Side Panel Application | Composition Root unívoco do Side Panel, seleção de ferramenta e catálogo estático | [`src/app/sidepanel/`](src/app/sidepanel/) (`SidePanelApp.tsx`, `tool-catalog.ts`) | 2 suítes Vitest com 9 testes unitários (`SidePanelApp.test.tsx`, `tool-catalog.test.ts`), relatório formal emitido | **`Homologado`** |
+| **B1-S01** | Visual Foundation | Design Tokens em `:root` e `@theme`, resets globais, a11y foco/movimento | [`src/shared/styles/`](src/shared/styles/) (`tokens.css`, `globals.css`, `tokens.ts`), [`src/entrypoints/sidepanel/style.css`](src/entrypoints/sidepanel/style.css) | 2 suítes Vitest com 15 testes (`tokens.test.ts`, `visual-foundation.test.ts`), plugin `@tailwindcss/vite` ativo, relatório emitido | **`Homologado`** |
 
-#### Fase 4: `M3-PHASE-4` — Platform Persistence & Storage (`src/platform/persistence/`)
+---
+
+### 4.2.1. Matriz dos Entregáveis Arquiteturais do Bloco 2 (Design System e Primitivos)
+
+A decomposição arquitetural do Bloco 2 estrutura-se em entregáveis atômicos implementados em `src/shared/ui/` sob React 19 nativo e Tailwind 4. Todos foram implementados, testados e **Homologados**:
+
+| ID | Entregável Arquitetural | Responsabilidade Principal | Arquivos e Módulos Principais | Evidências e Testes | Estado Operacional |
+| :---: | :--- | :--- | :--- | :--- | :---: |
+| **B2-F01** | Shared Contracts & Utils | Contratos base de tipagem (`VisualSize`, `FormFieldA11yProps`) e utilitário `cx` | `src/shared/ui/types.ts`, `src/shared/ui/utils/cx.ts` | Suíte Vitest `cx.test.ts` (3 testes), conformidade com ARC-R05 | **`Homologado`** |
+| **B2-C01** | Button | Botão interativo acessível (variantes, `visualSize`, loading com spinner, anel de foco) | `src/shared/ui/button/Button.tsx`, `index.ts` | Suíte Vitest `Button.test.tsx` (10 testes unitários), `type="button"` por padrão | **`Homologado`** |
+| **B2-C02** | Input | Campo textual acessível com amarração `label`, `hint`, `error`, `role="alert"` e `useId()` | `src/shared/ui/input/Input.tsx`, `index.ts` | Suíte Vitest `Input.test.tsx` (12 testes unitários), suporte a slots de ícones | **`Homologado`** |
+| **B2-C03** | Select | Controle nativo `<select>` estilizado com chevron SVG decorativo e acessibilidade | `src/shared/ui/select/Select.tsx`, `index.ts` | Suíte Vitest `Select.test.tsx` (12 testes unitários), suporte a options e optgroup | **`Homologado`** |
+| **B2-C04** | Panel | Contêiner estrutural com polimorfismo controlado (`div`, `section`, `aside`), superfícies e paddings | `src/shared/ui/panel/Panel.tsx`, `index.ts` | Suíte Vitest `Panel.test.tsx` (7 testes unitários), desacoplado de lógica de negócio | **`Homologado`** |
+| **B2-C05** | Badge | Rotulagem informativa estática com 4 tonalidades semânticas (`neutral`, `success`, `warning`, `danger`) | `src/shared/ui/badge/Badge.tsx`, `index.ts` | Suíte Vitest `Badge.test.tsx` (6 testes unitários), contraste auditado WCAG 2.1 AA | **`Homologado`** |
+| **B2-C06** | Icon & Glyph Catalogue | Catálogo tipado SVG inline nativo monocromático herdando cor do pai via `currentColor` | `src/shared/ui/icon/Icon.tsx`, `icons.tsx`, `index.ts` | Suíte Vitest `Icon.test.tsx` (8 testes unitários), modos decorativo e acessível | **`Homologado`** |
+| **B2-API** | Public API & Integration | Barrel canônico `src/shared/ui/index.ts` e integração no Side Panel via `ToolPlaceholder` | `src/shared/ui/index.ts`, `src/features/workspace-shell/components/ToolPlaceholder.tsx` | Suíte Vitest `index.test.ts` (2 testes) e testes de regressão do Workspace Shell aprovados | **`Homologado`** |
+
+---
+
+### 4.3. Checklist Geral de Tarefas Operacionais de M3
+
+#### Fase 1: `M3-PHASE-1` — Entrypoints WXT & Side Panel Shell (HOMOLOGADA COM RESERVAS) (HOMOLOGADA)
+- [x] `M3-P1-T01` — Preparação do baseline de M3 e diagnóstico de compilação dos entrypoints WXT. *(Bloco 0 — Homologado formalmente com reservas em `docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md`)*
+- [x] `M3-P1-T02` — Estruturação física dos entrypoints WXT (`src/entrypoints/sidepanel/`, `background/`, `content/`). *(Bloco 1 / B1-I01 / B1-I02 — Homologado com reservas)*
+- [x] `M3-P1-T03` — Bootstrap e inicialização do runtime React 19 no Side Panel (`main.tsx`, `App.tsx`). *(Bloco 1 / B1-I01 — Homologado com reservas)*
+- [x] `M3-P1-T04` — Implementação do layout principal do Side Panel (Header, Workspace Container, Status Bar) conforme `DESIGN.md`. *(Bloco 1 / B1-F01 — Homologado com reservas)*
+- [x] `M3-P1-T05` — Implementação do mecanismo atômico de navegação e alternador de ferramentas no shell. *(Bloco 1 / B1-F02 / B1-C01 — Homologado com reservas)*
+- [x] `M3-P1-T06` — Validação de build WXT (`pnpm build`), verificação do Manifest V3 gerado e testes de renderização. *(Bloco 1 / B1-I02 / B1-S01 — Homologado com reservas; 228 testes Vitest aprovados)*
+
+> [!NOTE]
+> **Status de Conclusão da Fase 1:** Todas as 6 tarefas operacionais da Fase 1 foram integralmente implementadas e homologadas sob parecer favorável com reservas. Evidência canônica consolidada em [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-REVISAO-FINAL-BLOCO-1.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-REVISAO-FINAL-BLOCO-1.md). A Fase 2 encontra-se **desbloqueada**.
+
+#### Fase 2: `M3-PHASE-2` — Design System Primitivo (`src/shared/ui/`) — *HOMOLOGADA*
+- [x] `M3-P2-T01` — Configuração e consolidação dos tokens visuais Tailwind CSS (paleta `#101013`, `#1E1E22`, `#DF2531`, tipografia, escala visual e utilitário `cx`). *(Bloco 2 — Homologado)*
+- [x] `M3-P2-T02` — Implementação do componente atômico `Button` (Primary, Secondary, Danger, loading, spinner e foco acessível com 10 testes). *(Bloco 2 — Homologado)*
+- [x] `M3-P2-T03` — Implementação dos componentes de formulário `Input` e `Select` acessíveis com amarração `useId()`, `error`, `hint` e `role="alert"` (24 testes). *(Bloco 2 — Homologado)*
+- [x] `M3-P2-T04` — Implementação dos componentes estruturais `Panel` e `Badge` com polimorfismo controlado e 4 tonalidades (13 testes). *(Bloco 2 — Homologado)*
+- [x] `M3-P2-T05` — Implementação do catálogo tipado de ícones SVG inline (`Icon`, `icons.tsx`) com modos decorativo e acessível (8 testes). *(Bloco 2 — Homologado)*
+- [x] `M3-P2-T06` — Consolidação da API Pública (`src/shared/ui/index.ts`), integração de `ToolPlaceholder.tsx` no Side Panel e suíte de testes unitários no Vitest (60 novos testes, 288 testes totais aprovados). *(Bloco 2 — Homologado)*
+
+> [!NOTE]
+> **Status de Conclusão da Fase 2:** Todas as 6 tarefas operacionais da Fase 2 foram integralmente implementadas, testadas e homologadas sob parecer favorável. Evidência canônica consolidada em [`docs/Relatorios/m3/Bloco_2/RELATORIO-EXECUCAO-BLOCO-2.md`](docs/Relatorios/m3/Bloco_2/RELATORIO-EXECUCAO-BLOCO-2.md). A Fase 3 (`M3-PHASE-3` — Platform Messaging) encontra-se **desbloqueada**.
+
+#### Fase 3: `M3-PHASE-3` — Platform Messaging Fortemente Tipado (`src/platform/messaging/`) — *EM ANDAMENTO*
+- [x] `M3-P3-T01` — Definição dos contratos e esquemas tipados de mensagens entre Side Panel, Background e Content Scripts (`contracts.ts`, `contracts.typecheck.ts`, `index.ts`). *(Bloco 3 / B3-F01 — Concluído e Validado com 11 testes unitários no Vitest e typecheck estático)*
+- [ ] `M3-P3-T02` — Implementação do barramento de envio tipado (`sendMessage`) com timeout e tratamento fail-safe. *(Bloco 3 / B3-F02 — Messaging Client)*
+- [ ] `M3-P3-T03` — Implementação do despachante e receptor de mensagens (`onMessage`) com validação de payload. *(Bloco 3 / B3-F03 — Background Router)*
+- [ ] `M3-P3-T04` — Suíte de testes unitários e mocks determinísticos do barramento de mensageria com Vitest. *(Bloco 3 / B3-F04)*
+
+#### Fase 4: `M3-PHASE-4` — Platform Persistence & Storage (`src/platform/persistence/`) — *PENDENTE*
 - [ ] `M3-P4-T01` — Definição das interfaces e contratos de persistência local (`StorageAdapter`, `KeyValueStore`). *(Bloco 4)*
 - [ ] `M3-P4-T02` — Implementação do adaptador `ChromeStorageAdapter` sobre `chrome.storage.local` com serialização e fallback. *(Bloco 4)*
 - [ ] `M3-P4-T03` — Avaliação técnica e formalização do contrato para `IndexedDBAdapter` (visando features complexas). *(Bloco 4)*
 - [ ] `M3-P4-T04` — Suíte de testes unitários com mocks de armazenamento local, cenários de quota e resiliência a falhas. *(Bloco 4)*
 
-#### Fase 5: `M3-PHASE-5` — Validação, Testes Integrados e Homologação
+#### Fase 5: `M3-PHASE-5` — Validação, Testes Integrados e Homologação — *PENDENTE*
 - [ ] `M3-P5-T01` — Integração ponta a ponta do Side Panel Shell com o barramento de mensageria e o armazenamento local. *(Bloco 5)*
 - [ ] `M3-P5-T02` — Execução da esteira completa de Quality Gates aplicáveis (`QG-01` a `QG-04`, `QG-07` a `QG-10`, `QG-12`). *(Bloco 5)*
 - [ ] `M3-P5-T03` — Auditoria arquitetural de fronteiras (comprovação de zero vazamentos entre platform, shared e entrypoints). *(Bloco 5)*
 - [ ] `M3-P5-T04` — Emissão do Relatório Canônico de Homologação de M3 (`docs/Relatorios/m3/M3-PLATFORM-REPORT.md`) e Gate M3 → M4. *(Bloco 5)*
 
-### 4.3. Próxima Ação Prioritária (Unívoca)
-> **Ação Imediata:** Iniciar o **Bloco 1 do Milestone M3 (`M3-PHASE-1`)** executando as tarefas **`M3-P1-T02` a `M3-P1-T06`**: Realizar a estruturação física dos entrypoints WXT (`sidepanel`, `background`, `content`), o bootstrap do React 19 no Side Panel Shell e a validação inicial de compilação sem regras de negócio de features.
+---
+
+### 4.4. Critérios Canônicos da Revisão Final do Bloco 1
+
+Para que o Bloco 1 seja homologado e o Bloco 2 seja desbloqueado, a auditoria consolidada deve atestar o cumprimento dos seguintes critérios:
+
+1. **Arquitetura & Limites Modulares:**
+   - Isolamento Feature-First estrito: zero importações cruzadas entre `tool-navigation` e `workspace-shell` (ARC-R01).
+   - Encapsulamento por API pública: consumo exclusivo via `index.ts` das features (ARC-R02).
+   - Isolamento de Shared: `src/shared/styles/` sem dependências de camadas superiores (ARC-R05).
+   - Composição limpa: `SidePanelApp` atuando estritamente como Composition Root sem regras de domínio.
+   - Estado de navegação com fonte única de verdade (`activeToolId`), derivando metadados estáticos do catálogo.
+2. **Funcionalidade & Robustez:**
+   - Montagem determinística da árvore React 19 no elemento `#root`.
+   - Navegação funcional refletindo a ferramenta ativa sem desmontagens espúrias do shell.
+   - Contenção de falhas via `RenderErrorBoundary` protegendo o cabeçalho e a barra de navegação contra erros de renderização.
+3. **Integração com Navegador (Manifest V3 / Chromium):**
+   - Manifest V3 gerado limpo com permissão mínima necessária (`sidePanel`).
+   - Apontamento correto de `side_panel.default_path` para `sidepanel.html`.
+4. **Fundamentos Visuais & Acessibilidade (WCAG 2.2 AA):**
+   - Design Tokens em variáveis CSS `:root` e `@theme` do Tailwind 4 conforme `DESIGN.md`.
+   - Indicador de foco visível padronizado (`:focus-visible`) com `outline: 2px solid #DF2531`.
+   - Aderência a `prefers-reduced-motion` com redução de transições/animações para 0.01ms.
+   - Contenção dimensional com `overflow-wrap: anywhere` prevenindo quebras de layout em larguras de 320px a 600px.
+   - Prova matemática de contraste: Brand Red sobre Branco (4.72:1) e Texto sobre Fundo (18.52:1).
+5. **Quality Gates & Segurança:**
+   - QG-01 (Repository Safety): zero segredos, caminhos absolutos locais ou referências proibidas.
+   - QG-02 (Architecture Boundaries): zero violações e zero dependências circulares via `boundary-linter.mjs`.
+   - QG-03 (Static Code Quality): typecheck (`tsc --noEmit`), lint (`eslint .`) e formatação (`prettier`) 100% aprovados.
+   - QG-04 (Automated Testing): 100% de aprovação na suíte de testes unitários (218 testes em 23 suítes).
+   - QG-08 (Build Integrity): bundle WXT de produção gerado com sucesso sem erros.
+
+---
+
+### 4.5. Próxima Ação Prioritária (Unívoca)
+> **Ação Imediata:** Executar a **Auditoria e Revisão Consolidada do Bloco 1 de M3-PHASE-1**, avaliando os 6 entregáveis arquiteturais (`B1-I01`, `B1-I02`, `B1-F01`, `B1-F02`, `B1-C01`, `B1-S01`) e os 5 eixos de aceitação (arquitetural, funcional, integração MV3, visual/a11y e qualidade/segurança), consolidando as evidências no relatório canônico de homologação do Bloco 1 para destravamento do Bloco 2.
 
 ---
 
@@ -227,44 +324,44 @@ O avanço entre a governança do harness (M2) e a implementação da plataforma/
 
 ### 7.1. Detalhamento dos Seis Blocos Incrementais de M3
 
-| Bloco | Nome Oficial | Fases Cobertas | Tarefas Incluídas | Objetivo Principal | Dependências |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-| **Bloco 0** | **Preparação & Baseline** | `M3-PHASE-1` | `M3-P1-T01` | Diagnóstico de tooling WXT/React 19, preflight de build e reconciliação | M2 homologado |
-| **Bloco 1** | **WXT & Side Panel Shell** | `M3-PHASE-1` | `M3-P1-T02` a `M3-P1-T06` | Estruturar entrypoints, bootstrap React 19, layout Sidepanel e navegação | Bloco 0 |
-| **Bloco 2** | **Design System Primitivo** | `M3-PHASE-2` | `M3-P2-T01` a `M3-P2-T06` | Tokens Tailwind, componentes Button/Input/Card/Badge e testes a11y | Bloco 1 |
-| **Bloco 3** | **Platform Messaging** | `M3-PHASE-3` | `M3-P3-T01` a `M3-P3-T04` | Contratos de mensagem, barramento tipado, dispatcher e testes | Bloco 1 |
-| **Bloco 4** | **Platform Persistence** | `M3-PHASE-4` | `M3-P4-T01` a `M3-P4-T04` | StorageAdapter, ChromeStorageAdapter, IndexedDB contract e testes | Bloco 1 |
-| **Bloco 5** | **Integração & Homologação** | `M3-PHASE-5` | `M3-P5-T01` a `M3-P5-T04` | Integração shell-platform, build limpo WXT, QGs e destravamento para M4 | Blocos 2, 3 e 4 |
+| Bloco | Nome Oficial | Fases Cobertas | Tarefas Incluídas | Objetivo Principal | Dependências | Estado Operacional |
+| :---: | :--- | :--- | :--- | :--- | :--- | :---: |
+| **Bloco 0** | **Preparação & Baseline** | `M3-PHASE-1` | `M3-P1-T01` | Diagnóstico de tooling WXT/React 19, preflight de build e reconciliação | M2 homologado | **`HOMOLOGADO`** *(Com reservas aceitas)* |
+| **Bloco 1** | **WXT & Side Panel Shell** | `M3-PHASE-1` | `M3-P1-T02` a `M3-P1-T06` | Estruturar entrypoints, bootstrap React 19, layout Sidepanel, navegação e Visual Foundation | Bloco 0 | **`HOMOLOGADO`** *(Com reservas aceitas)* |
+| **Bloco 2** | **Design System Primitivo** | `M3-PHASE-2` | `M3-P2-T01` a `M3-P2-T06` | Tokens Tailwind, componentes Button/Input/Card/Badge e testes a11y | Bloco 1 homologado | **`DESBLOQUEADO`** *(Autorizado para início)* |
+| **Bloco 3** | **Platform Messaging** | `M3-PHASE-3` | `M3-P3-T01` a `M3-P3-T04` | Contratos de mensagem, barramento tipado, dispatcher e testes | Bloco 1 homologado | **`EM ANDAMENTO`** *(B3-F01 concluída)* |
+| **Bloco 4** | **Platform Persistence** | `M3-PHASE-4` | `M3-P4-T01` a `M3-P4-T04` | StorageAdapter, ChromeStorageAdapter, IndexedDB contract e testes | Bloco 1 homologado | `Pendente` |
+| **Bloco 5** | **Integração & Homologação** | `M3-PHASE-5` | `M3-P5-T01` a `M3-P5-T04` | Integração shell-platform, build limpo WXT, QGs e destravamento para M4 | Blocos 2, 3 e 4 | `Pendente` |
 
 ### 7.2. Detalhamento das Tarefas por Fase
 
-#### Fase 1: `M3-PHASE-1` — Entrypoints WXT & Side Panel Shell
+#### Fase 1: `M3-PHASE-1` — Entrypoints WXT & Side Panel Shell (HOMOLOGADA COM RESERVAS)
 
 | ID | Título | Objetivo | Dependências | Escopo | Entregáveis | Quality Gates | Critério de Aceitação | Evidência | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- | :---: | :--- | :--- | :---: |
-| `M3-P1-T01` | Diagnóstico de Baseline & Tooling WXT | Validar compatibilidade do WXT e React 19 antes de escrever código | M2 homologado | Verificação de scripts, build preflight e configs | Relatório de preflight | QG-01, QG-03 | Build de teste e typecheck sem erros | Log de preflight | `Pronto` |
-| `M3-P1-T02` | Estruturação dos Entrypoints WXT | Configurar diretórios físicos de entrypoints Manifest V3 | `M3-P1-T01` | Criar `sidepanel/`, `background/`, `content/` | Entrypoints com metadados WXT | QG-01, QG-02 | WXT reconhece entrypoints sem avisos | Arquivos criados | `Planejado` |
-| `M3-P1-T03` | Bootstrap React 19 no Side Panel | Inicializar o ciclo de vida do React no painel lateral | `M3-P1-T02` | Implementar `main.tsx` e `App.tsx` no Side Panel | Raiz React 19 montada e estilizada | QG-02, QG-03 | Renderização limpa sem hydration errors | Teste de montagem | `Planejado` |
-| `M3-P1-T04` | Layout Principal do Side Panel Shell | Construir casca visual padronizada conforme `DESIGN.md` | `M3-P1-T03` | Header tecnológico, container central, status bar | Componente de Shell e layout | QG-02, QG-12 | Conformidade visual com paleta e contraste | Testes de snapshot | `Planejado` |
-| `M3-P1-T05` | Navegação e Alternador de Workspaces | Permitir alternar visualização sem acoplar a features | `M3-P1-T04` | Navegador atômico no topo do Side Panel | Menu e rotas locais de workspace | QG-02, QG-03 | Troca de visão preservando estado de sessão | Testes unitários | `Planejado` |
-| `M3-P1-T06` | Validação de Build e Manifesto WXT | Assegurar que o bundle de produção seja gerado limpo | `M3-P1-T05` | Compilação com `pnpm build` e inspeção do MV3 | Pacote em `.output/` validado | QG-08, QG-09 | Zero erros de empacotamento; permissões mínimas | Log de build | `Planejado` |
+| `M3-P1-T01` | Diagnóstico de Baseline & Tooling WXT | Validar compatibilidade do WXT e React 19 antes de escrever código | M2 homologado | Verificação de scripts, build preflight e configs | Relatório de preflight | QG-01, QG-03 | Build de teste e typecheck sem erros | Log de preflight | **`Homologado`** |
+| `M3-P1-T02` | Estruturação dos Entrypoints WXT | Configurar diretórios físicos de entrypoints Manifest V3 | `M3-P1-T01` | Criar `sidepanel/`, `background/`, `content/` | Entrypoints com metadados WXT | QG-01, QG-02 | WXT reconhece entrypoints sem avisos | Arquivos criados (`B1-I01`, `B1-I02`) | **`Homologado`** |
+| `M3-P1-T03` | Bootstrap React 19 no Side Panel | Inicializar o ciclo de vida do React no painel lateral | `M3-P1-T02` | Implementar `main.tsx` e `App.tsx` no Side Panel | Raiz React 19 montada e estilizada | QG-02, QG-03 | Renderização limpa sem hydration errors | Teste de montagem (`B1-I01`) | **`Homologado`** |
+| `M3-P1-T04` | Layout Principal do Side Panel Shell | Construir casca visual padronizada conforme `DESIGN.md` | `M3-P1-T03` | Header tecnológico, container central, status bar | Componente de Shell e layout | QG-02, QG-12 | Conformidade visual com paleta e contraste | Testes unitários (`B1-F01`, `B1-S01`) | **`Homologado`** |
+| `M3-P1-T05` | Navegação e Alternador de Workspaces | Permitir alternar visualização sem acoplar a features | `M3-P1-T04` | Navegador atômico no topo do Side Panel | Menu e rotas locais de workspace | QG-02, QG-03 | Troca de visão preservando estado de sessão | Testes unitários (`B1-F02`, `B1-C01`) | **`Homologado`** |
+| `M3-P1-T06` | Validação de Build e Manifesto WXT | Assegurar que o bundle de produção seja gerado limpo | `M3-P1-T05` | Compilação com `pnpm build` e inspeção do MV3 | Pacote em `.output/` validado | QG-08, QG-09 | Zero erros de empacotamento; permissões mínimas | Log de build (`B1-I02`, `B1-S01`) | **`Homologado`** |
 
-#### Fase 2: `M3-PHASE-2` — Design System Primitivo (`src/shared/ui/`)
+#### Fase 2: `M3-PHASE-2` — Design System Primitivo (`src/shared/ui/`) — *DESBLOQUEADA (Pronta para Início)*
 
 | ID | Título | Objetivo | Dependências | Escopo | Entregáveis | Quality Gates | Critério de Aceitação | Evidência | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- | :---: | :--- | :--- | :---: |
-| `M3-P2-T01` | Configuração de Tokens Tailwind | Estabelecer variáveis semânticas de cor, fonte e borda | `M3-P1-T06` | Configurar cores `#101013`, `#1E1E22`, `#DF2531` | Tokens CSS e classes utilitárias | QG-01, QG-03 | Tokens exportados e validados | Config Tailwind | `Planejado` |
-| `M3-P2-T02` | Componente Atômico Button | Fornecer botão com variantes e acessibilidade WCAG | `M3-P2-T01` | Variantes Primary, Secondary, Ghost, Destructive | `Button.tsx` e types | QG-03, QG-12 | Navegação por teclado e foco visível | Testes unitários | `Planejado` |
-| `M3-P2-T03` | Componentes de Entrada de Formulário | Fornecer inputs padronizados para ferramentas | `M3-P2-T01` | Componentes `Input`, `Textarea` e `Select` | Componentes em `src/shared/ui/` | QG-03, QG-12 | Labels associados e foco em Brand Red | Testes de render | `Planejado` |
-| `M3-P2-T04` | Componentes Estruturais de Painel | Fornecer contêineres e cartões visuais limpos | `M3-P2-T01` | Componentes `Card`, `Panel` e `Badge` de status | Componentes em `src/shared/ui/` | QG-02, QG-03 | Superfícies com bordas e elevação correta | Testes visuais | `Planejado` |
-| `M3-P2-T05` | Catálogo de Ícones e Indicadores | Padronizar feedback visual e ícones de ação | `M3-P2-T01` | Componentes `Icon`, `LoadingSpinner`, `EmptyState`| Utilitários visuais compartilhados | QG-03, QG-12 | Ícones SVG inline seguros, sem innerHTML | Testes unitários | `Planejado` |
-| `M3-P2-T06` | Suíte de Testes de Acessibilidade UI | Comprovar contraste e acessibilidade dos primitivos | `M3-P2-T02..05`| Auditoria de contraste AA/AAA e foco por teclado | Testes com Vitest em `src/shared/ui/`| QG-04, QG-12 | 100% de testes passando sem violações a11y | Relatório de testes | `Planejado` |
+| `M3-P2-T01` | Configuração de Tokens Tailwind | Estabelecer variáveis semânticas de cor, fonte e borda | `M3-P1-T06` | Configurar cores `#101013`, `#1E1E22`, `#DF2531` | Tokens CSS e classes utilitárias | QG-01, QG-03 | Tokens exportados e validados | Config Tailwind | `Pronta` |
+| `M3-P2-T02` | Componente Atômico Button | Fornecer botão com variantes e acessibilidade WCAG | `M3-P2-T01` | Variantes Primary, Secondary, Ghost, Destructive | `Button.tsx` e types | QG-03, QG-12 | Navegação por teclado e foco visível | Testes unitários | `Bloqueado` |
+| `M3-P2-T03` | Componentes de Entrada de Formulário | Fornecer inputs padronizados para ferramentas | `M3-P2-T01` | Componentes `Input`, `Textarea` e `Select` | Componentes em `src/shared/ui/` | QG-03, QG-12 | Labels associados e foco em Brand Red | Testes de render | `Bloqueado` |
+| `M3-P2-T04` | Componentes Estruturais de Painel | Fornecer contêineres e cartões visuais limpos | `M3-P2-T01` | Componentes `Card`, `Panel` e `Badge` de status | Componentes em `src/shared/ui/` | QG-02, QG-03 | Superfícies com bordas e elevação correta | Testes visuais | `Bloqueado` |
+| `M3-P2-T05` | Catálogo de Ícones e Indicadores | Padronizar feedback visual e ícones de ação | `M3-P2-T01` | Componentes `Icon`, `LoadingSpinner`, `EmptyState`| Utilitários visuais compartilhados | QG-03, QG-12 | Ícones SVG inline seguros, sem innerHTML | Testes unitários | `Bloqueado` |
+| `M3-P2-T06` | Suíte de Testes de Acessibilidade UI | Comprovar contraste e acessibilidade dos primitivos | `M3-P2-T02..05`| Auditoria de contraste AA/AAA e foco por teclado | Testes com Vitest em `src/shared/ui/`| QG-04, QG-12 | 100% de testes passando sem violações a11y | Relatório de testes | `Bloqueado` |
 
 #### Fase 3: `M3-PHASE-3` — Platform Messaging Fortemente Tipado (`src/platform/messaging/`)
 
 | ID | Título | Objetivo | Dependências | Escopo | Entregáveis | Quality Gates | Critério de Aceitação | Evidência | Estado |
 | :--- | :--- | :--- | :--- | :--- | :--- | :---: | :--- | :--- | :---: |
-| `M3-P3-T01` | Contratos e Tipos de Mensageria | Tipar formalmente todas as mensagens de background | `M3-P1-T06` | Esquemas de mensagens e tipos de payload | `contracts.ts` e `types.ts` | QG-02, QG-03 | Interfaces fortemente tipadas sem `any` | Arquivos de tipo | `Planejado` |
+| `M3-P3-T01` | Contratos e Tipos de Mensageria (B3-F01) | Tipar formalmente todas as mensagens de background | `M3-P1-T06` | Esquemas de mensagens e tipos de payload | `contracts.ts`, `contracts.typecheck.ts`, `index.ts` | QG-02, QG-03, QG-04 | Interfaces fortemente tipadas sem `any`, testes positivos e negativos | `contracts.test.ts` (11 testes Vitest), `contracts.typecheck.ts` (`tsc --noEmit`) | **`Concluído`** |
 | `M3-P3-T02` | Barramento de Envio (sendMessage) | Despachar mensagens tipadas com timeout e fail-safe | `M3-P3-T01` | Função assíncrona `sendTypedMessage` | Módulo de envio em `src/platform/` | QG-02, QG-04 | Rejeição correta diante de timeout | Testes unitários | `Planejado` |
 | `M3-P3-T03` | Receptor e Despachante (onMessage) | Processar mensagens em background com validação | `M3-P3-T01` | Roteador e handler seguro de mensagens | Módulo receptor em `src/platform/`| QG-01, QG-02 | Validação de payload com descarte de inválidos | Testes unitários | `Planejado` |
 | `M3-P3-T04` | Suíte de Testes do Barramento | Garantir confiabilidade e determinismo da mensageria | `M3-P3-T02..03`| Mocks de `chrome.runtime` e testes de borda | Testes Vitest em `tests/unit/platform/`| QG-04, QG-06 | 100% de aprovação em cenários assíncronos | Relatório de testes | `Planejado` |
@@ -397,18 +494,23 @@ A governança formal das decisões arquiteturais reside em [`docs/architecture/R
 
 ### M3 — Product Shell & Platform Foundation
 - **Objetivo:** Construir a infraestrutura mínima funcional da extensão no WXT (Side Panel, barramento de mensagens e adaptadores de plataforma) e primitivos compartilhados de UI.
-- **Estado:** `Pronto para início estrutural (Bloco 0 de Preparação)`
-- **Progresso:** 0/5 fases concluídas (0% — 23 tarefas planejadas em 6 blocos).
+- **Estado:** `Em Andamento (Bloco 0 e Bloco 1 homologados com reservas; Bloco 2 desbloqueado; Blocos 3 a 5 pendentes)`
+- **Progresso:** 1/5 fases homologadas (Fase 1 com 6/6 tarefas homologadas; 2 de 6 blocos homologados: Bloco 0 e Bloco 1; 6/23 tarefas homologadas, 17 pendentes).
 - **Dependências:** M2 concluído e homologado (*Atendida*).
 - **Fases:**
-  - [ ] `M3-PHASE-1` — Entrypoints WXT & Side Panel Shell (`src/entrypoints/sidepanel/` com React 19).
-  - [ ] `M3-PHASE-2` — Design System Primitivo (`src/shared/ui/`: Button, Input, Select, Panel, Badge, Icon).
+  - [x] `M3-PHASE-1` — Entrypoints WXT & Side Panel Shell (*Homologada com reservas; 6 entregáveis B1-I01 a B1-S01 validados*).
+  - [ ] `M3-PHASE-2` — Design System Primitivo (`src/shared/ui/`: Button, Input, Select, Panel, Badge, Icon — *Desbloqueada e pronta para início*).
   - [ ] `M3-PHASE-3` — Platform Messaging fortemente tipado (`src/platform/messaging/`).
   - [ ] `M3-PHASE-4` — Platform Persistence & Storage (`chrome.storage.local` e `IndexedDB` em `src/platform/persistence/`).
   - [ ] `M3-PHASE-5` — Validação da Plataforma e testes integrados no Chrome via WXT.
-- **Entregáveis:** Side Panel renderizando com layout oficial, navegação operacional e adaptadores tipados com cobertura de testes unitários.
-- **Critérios de Aceitação:** `pnpm build` gera bundle limpo, renderização sem warnings no navegador e persistência testada via mocks.
-- **Evidências:** A serem geradas em `docs/Relatorios/m3/M3-PLATFORM-REPORT.md`.
+- **Entregáveis do Bloco 1:** Entrypoint WXT no Side Panel (`B1-I01`, `B1-I02`), casca estrutural permanente (`WorkspaceShell` / `B1-F01`), navegação atômica controlada (`ToolNavigation` / `B1-F02`), Composition Root unívoco (`SidePanelApp` / `B1-C01`), resiliência a falhas (`RenderErrorBoundary`), Design Tokens com a11y WCAG 2.2 AA (`Visual Foundation` / `B1-S01`) e integração Chromium com Action API.
+- **Critérios de Homologação:** Zero violações no Boundary Linter (`QG-02`), zero segredos (`QG-01`), typecheck e lint limpos (`QG-03`), 228 testes automatizados aprovados no Vitest (`QG-04`), build limpo WXT gerando MV3 com Tailwind 4 (`QG-08`) e parecer formal de auditoria consolidada aprovado com reservas.
+- **Evidências:**
+  - Bloco 0: [`docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md`](docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md)
+  - Bloco 1 (B1-F02): [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-F02-TOOL-NAVIGATION.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-F02-TOOL-NAVIGATION.md)
+  - Bloco 1 (B1-C01): [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-C01-SIDEPANEL-APP.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-C01-SIDEPANEL-APP.md)
+  - Bloco 1 (B1-S01): [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-S01-VISUAL-FOUNDATION.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-S01-VISUAL-FOUNDATION.md)
+  - Relatório Consolidado de Homologação de M3: A ser emitido na conclusão de M3 em `docs/Relatorios/m3/M3-PLATFORM-REPORT.md`.
 
 ---
 
@@ -602,6 +704,11 @@ Nenhum entregável é aceito no repositório sem cumprimento irrestrito dos Qual
 | **2026-11-07** | M2 (Auditoria Final) | Auditoria técnica independente de todos os 8 blocos de M2, homologação formal com ressalvas aceitas (`COMPLETED_WITH_RESERVATIONS`) e destravamento para M3. | [`docs/Relatorios/m2/auditoria-final/RELATORIO-AUDITORIA-INTEGRAL-M2.md`](docs/Relatorios/m2/auditoria-final/RELATORIO-AUDITORIA-INTEGRAL-M2.md) |
 | **2026-11-07** | M3 (Planejamento) | Reconciliação canônica de `status.md` e estruturação operacional de M3 (5 fases, 23 tarefas e 6 blocos incrementais). | [`docs/Relatorios/m3/planejamento/RELATORIO-ESTRUTURACAO-OPERACIONAL-M3.md`](docs/Relatorios/m3/planejamento/RELATORIO-ESTRUTURACAO-OPERACIONAL-M3.md) |
 | **2026-11-07** | M3 (Bloco 0) | Conclusão da Investigação, Validação de Baseline e Prontidão de M3 (Parecer `READY_WITH_RESERVATIONS`). | [`docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md`](docs/Relatorios/m3/bloco-0-baseline/RELATORIO-M3-BLOCO-0-BASELINE-E-PRONTIDAO.md) |
+| **2026-11-08** | M3 (Bloco 1 / B1-C01) | Implementação da composição SidePanelApp (Composition Root), tool-catalog, RenderErrorBoundary e testes integrados. | [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-C01-SIDEPANEL-APP.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-C01-SIDEPANEL-APP.md) |
+| **2026-11-08** | M3 (Bloco 1 / B1-S01) | Implementação dos fundamentos visuais do Visual Foundation (`tokens.css`, `globals.css`, `tokens.ts`), tokens Tailwind 4 e 218 testes unitários. | [`docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-S01-VISUAL-FOUNDATION.md`](docs/Relatorios/m3/bloco-1-sidepanel-shell/RELATORIO-IMPLEMENTACAO-B1-S01-VISUAL-FOUNDATION.md) |
+| **2026-11-08** | M3 (Bloco 1 / Revisão Final) | Reconciliação canônica do `status.md`: consolidação dos 6 entregáveis (`B1-I01` a `B1-S01`), unificação dos indicadores de progresso, registro do estado operacional `IN_REVIEW` e condicionamento do Bloco 2 à homologação formal do Bloco 1. | [`status.md`](status.md) |
+| **2026-11-08** | Governança / File System | Criação da infraestrutura especializada em File System Access API: agente `file-system-engineer`, skill `file-system-access` com 4 referências normativas, suíte de governança `scripts/filesystem/` com 4 Quality Gates especializados (QG-FS-01 a QG-FS-04), 41 testes automatizados com fixtures e documentação canônica rastreável às 8 fontes oficiais. | [`docs/architecture/file-system-access-architecture.md`](docs/architecture/file-system-access-architecture.md) |
+| **2026-11-08** | M3 (Phase 3 / Bloco 3 / B3-F01) | Implementação dos contratos tipados de mensagens (`contracts.ts`), tipos derivados (`MessageType`, `RequestData`, `ResponseData`, `RequestMessage`, `AnyRequest`, `MessageReply`, `MessageResult`, `MessageError`, `MessageErrorCode`), testes de tipos com diretivas `@ts-expect-error` (`contracts.typecheck.ts`), barrel export (`index.ts`) e suíte de testes unitários com Vitest (`contracts.test.ts`, 11 testes aprovados). | [`src/platform/messaging/contracts.ts`](src/platform/messaging/contracts.ts), [`tests/unit/platform/messaging/contracts.test.ts`](tests/unit/platform/messaging/contracts.test.ts) |
 
 ---
 
@@ -625,6 +732,7 @@ Para assegurar a perenidade deste instrumento como centro de controle do desenvo
 - **Instruções Universais de Agentes:** [`AGENTS.md`](AGENTS.md)
 - **Adaptação para Gemini / Antigravity:** [`GEMINI.md`](GEMINI.md)
 - **Arquitetura de Software Canônica:** [`ARCHITECTURE.md`](ARCHITECTURE.md)
+- **Arquitetura da File System Access API:** [`docs/architecture/file-system-access-architecture.md`](docs/architecture/file-system-access-architecture.md)
 - **Design System & Identidade Visual:** [`DESIGN.md`](DESIGN.md)
 - **Arquitetura do Harness:** [`docs/architecture/HARNESS-ARCHITECTURE.md`](docs/architecture/HARNESS-ARCHITECTURE.md)
 - **Visão Geral das Ferramentas:** [`docs/product/PRODUCT-OVERVIEW.md`](docs/product/PRODUCT-OVERVIEW.md)

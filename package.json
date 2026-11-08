@@ -23,7 +23,8 @@
     "security:guard": "node scripts/security/publication-guard.mjs",
     "security:precommit": "node scripts/security/publication-guard.mjs staged",
     "security:prepush": "node scripts/security/publication-guard.mjs outgoing",
-    "test:security": "vitest run tests/harness/security/"
+    "test:security": "vitest run tests/harness/security/",
+    "verify:fs": "node scripts/filesystem/run-verify.mjs"
   },
   "packageManager": "pnpm@12.16.1",
   "dependencies": {
@@ -43,6 +44,7 @@
     "tailwindcss": "4.3.4",
     "typescript": "7.0.2",
     "vitest": "5.1.0",
+    "web-ext": "^10.8.0",
     "wxt": "0.21.5"
   }
 }

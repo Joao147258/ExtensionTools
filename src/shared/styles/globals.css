@@ -1,0 +1,106 @@
+/**
+ * ==============================================================================
+ * Projeto: ExtensionTools
+ * Módulo: src/shared/styles/globals.css
+ * Responsabilidade: Estilos globais estruturais e acessibilidade universal (B1-S01).
+ *
+ * Referência Canônica:
+ * - DESIGN.md (Seções 2.6, 6, 8, 9.1 e 10)
+ * - .local/docs/Blocos/M3/B1-S01.MD (Seções 3, 6, 10 e 12)
+ *
+ * Papel Arquitetural:
+ * - Importa os Design Tokens canônicos.
+ * - Estabelece os resets do documento do Side Panel com contenção dimensional estrita.
+ * - Configura a tipografia base e cores fundamentais de superfície.
+ * - Garante anel de foco visível acessível em controles interativos (WCAG 2.2 AA).
+ * - Respeita as preferências do sistema operacional para movimento reduzido.
+ *
+ * Invariantes:
+ * - Não cria seletores excessivamente invasivos sobre componentes específicos.
+ * - Não remove nem esconde indicadores de foco.
+ * - Não introduz larguras fixas que provoquem overflow horizontal no Side Panel.
+ * ==============================================================================
+ */
+
+@import './tokens.css';
+
+/* ============================================================================
+ * 1. Resets Estruturais e Contenção Dimensional do Side Panel
+ * ============================================================================ */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* ============================================================================
+ * 2. Estilos Básicos de Tipografia e Superfície do Documento
+ * ============================================================================ */
+body {
+  min-width: 0;
+  background-color: var(--et-color-bg-dark, #101013);
+  color: var(--et-color-text-primary, #ffffff);
+  font-family: var(--et-font-sans);
+  font-size: var(--et-text-body-size, 0.8125rem);
+  line-height: var(--et-text-body-lh, 1.125rem);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100%;
+}
+
+/* ============================================================================
+ * 3. Acessibilidade Visual: Indicador de Foco Padronizado (WCAG 2.2 AA)
+ * Garante foco perceptível na cor da marca (#df2531) para navegação por teclado.
+ * ============================================================================ */
+:where(button, a, input, select, textarea, [tabindex]:not([tabindex='-1'])):focus-visible {
+  outline: 2px solid var(--et-color-border-focus, #df2531);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+ * 4. Acessibilidade: Respeito a Movimento Reduzido (prefers-reduced-motion)
+ * Desativa ou minimiza durações de transições/animações sob preferência do usuário.
+ * ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================================
+ * 5. Adaptação Dimensional para Extensão (Prevenção de Overflow Horizontal)
+ * ============================================================================ */
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: anywhere;
+}

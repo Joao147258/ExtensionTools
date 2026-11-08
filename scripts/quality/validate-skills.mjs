@@ -20,6 +20,7 @@ export const CANONICAL_SKILLS = [
   'architecture-review',
   'code-review',
   'documentation',
+  'file-system-access',
   'implementation',
   'public-repository-safety',
   'release-validation',

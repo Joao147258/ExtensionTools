@@ -1,0 +1,173 @@
+/**
+ * ==============================================================================
+ * Projeto: ExtensionTools
+ * Módulo: src/shared/styles/tokens.css
+ * Responsabilidade: Definição canônica dos Design Tokens do ExtensionTools (B1-S01).
+ *
+ * Referência Canônica:
+ * - DESIGN.md (Seções 3, 4, 5, 6, 8 e 10)
+ *
+ * Papel Arquitetural:
+ * Concentrar todas as constantes visuais (cores, tipografia, espaçamentos,
+ * raios de borda, transições e regras de contraste) como variáveis CSS e
+ * integrá-las nativamente à diretiva @theme do Tailwind CSS 4.
+ *
+ * Invariantes:
+ * - Não cria fontes concorrentes de verdade.
+ * - Respeita a distinção entre opacidade e transparência (Brand Red 45% e 65%).
+ * - Não utiliza valores hardcoded espalhados fora deste catálogo canônico.
+ * ==============================================================================
+ */
+
+:root {
+  /* ==========================================================================
+   * 1. Paleta Primária (DESIGN.md Seção 3.1)
+   * ========================================================================== */
+  --et-color-brand-primary: #df2531;
+  --et-color-base-white: #ffffff;
+  --et-color-base-black: #000000;
+
+  /* ==========================================================================
+   * 2. Variações de Opacidade / Transparência da Marca (DESIGN.md Seção 3.2)
+   * 45% transparência = 55% opacidade (alpha 0.55 / 8C)
+   * 65% transparência = 35% opacidade (alpha 0.35 / 59)
+   * 85% transparência = 15% opacidade (alpha 0.15 / 26 - superfícies sutis)
+   * ========================================================================== */
+  --et-color-brand-alpha-55: rgba(223, 37, 49, 0.55);
+  --et-color-brand-alpha-35: rgba(223, 37, 49, 0.35);
+  --et-color-brand-alpha-15: rgba(223, 37, 49, 0.15);
+
+  /* ==========================================================================
+   * 3. Paleta Neutra e Superfícies — Modo Escuro Padrão (DESIGN.md Seção 3.3)
+   * ========================================================================== */
+  --et-color-bg-dark: #101013;
+  --et-color-surface-dark: #1e1e22;
+  --et-color-surface-elevated: #2b2b31;
+  --et-color-border-subtle: #2b2b33;
+  --et-color-border-focus: #df2531;
+
+  /* ==========================================================================
+   * 4. Ações e Interações Primárias (DESIGN.md Seção 4.1)
+   * ========================================================================== */
+  --et-color-action-primary: #df2531;
+  --et-color-action-hover: #c01f2a;
+  --et-color-action-active: #a31822;
+  --et-color-action-subtle: rgba(223, 37, 49, 0.15);
+
+  /* ==========================================================================
+   * 5. Cores Semânticas de Feedback (DESIGN.md Seção 3.4)
+   * Diferenciação obrigatória entre cor da marca e erro crítico.
+   * ========================================================================== */
+  --et-color-feedback-error: #e53935;
+  --et-color-feedback-error-subtle: rgba(229, 57, 53, 0.15);
+  --et-color-feedback-success: #10b981;
+  --et-color-feedback-success-subtle: rgba(16, 185, 129, 0.15);
+  --et-color-feedback-warning: #f59e0b;
+  --et-color-feedback-warning-subtle: rgba(245, 158, 11, 0.15);
+  --et-color-feedback-info: #3b82f6;
+  --et-color-feedback-info-subtle: rgba(59, 130, 246, 0.15);
+
+  /* ==========================================================================
+   * 6. Cores Semânticas de Tipografia (DESIGN.md Seção 4.1)
+   * ========================================================================== */
+  --et-color-text-primary: #ffffff;
+  --et-color-text-secondary: #9ca3af;
+  --et-color-text-muted: #6b7280;
+
+  /* ==========================================================================
+   * 7. Tipografia e Famílias de Fonte (DESIGN.md Seção 5)
+   * ========================================================================== */
+  --et-font-sans:
+    'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --et-font-mono:
+    ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  --et-font-display: Mokoto, 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Escala tipográfica base (rem com base em 16px) */
+  --et-text-display-size: 1.5rem; /* 24px */
+  --et-text-display-lh: 2rem; /* 32px */
+  --et-text-h1-size: 1.125rem; /* 18px */
+  --et-text-h1-lh: 1.625rem; /* 26px */
+  --et-text-h2-size: 0.9375rem; /* 15px */
+  --et-text-h2-lh: 1.375rem; /* 22px */
+  --et-text-body-size: 0.8125rem; /* 13px */
+  --et-text-body-lh: 1.125rem; /* 18px */
+  --et-text-small-size: 0.6875rem; /* 11px */
+  --et-text-small-lh: 1rem; /* 16px */
+  --et-text-code-size: 0.75rem; /* 12px */
+  --et-text-code-lh: 1.125rem; /* 18px */
+
+  /* ==========================================================================
+   * 8. Escala de Espaçamento — Base 4px (DESIGN.md Seção 6.1)
+   * ========================================================================== */
+  --et-space-1: 0.25rem; /* 4px */
+  --et-space-2: 0.5rem; /* 8px */
+  --et-space-3: 0.75rem; /* 12px */
+  --et-space-4: 1rem; /* 16px */
+  --et-space-6: 1.5rem; /* 24px */
+  --et-space-8: 2rem; /* 32px */
+
+  /* ==========================================================================
+   * 9. Raios de Borda (DESIGN.md Seção 6.2)
+   * ========================================================================== */
+  --et-radius-sm: 4px;
+  --et-radius-md: 6px;
+  --et-radius-lg: 8px;
+  --et-radius-full: 9999px;
+
+  /* ==========================================================================
+   * 10. Movimento e Transições (DESIGN.md Seção 8.2)
+   * ========================================================================== */
+  --et-transition-duration-fast: 150ms;
+  --et-transition-duration-normal: 200ms;
+  --et-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================
+ * Integração de Tema com Tailwind CSS 4 (@theme)
+ * Disponibiliza classes semânticas universais:
+ * - bg-brand-primary, text-brand-primary, border-brand-primary
+ * - bg-bg-dark, bg-surface-dark, bg-surface-elevated
+ * - border-border-subtle, border-border-focus
+ * - text-text-primary, text-text-secondary, text-text-muted
+ * - feedback: bg-feedback-error, text-feedback-success, etc.
+ * ============================================================================ */
+@theme {
+  --color-brand-primary: #df2531;
+  --color-brand-hover: #c01f2a;
+  --color-brand-active: #a31822;
+
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
+
+  --color-bg-dark: #101013;
+  --color-surface-dark: #1e1e22;
+  --color-surface-elevated: #2b2b31;
+
+  --color-border-subtle: #2b2b33;
+  --color-border-default: #2b2b33;
+  --color-border-focus: #df2531;
+
+  --color-action-primary: #df2531;
+  --color-action-hover: #c01f2a;
+  --color-action-active: #a31822;
+
+  --color-feedback-error: #e53935;
+  --color-feedback-success: #10b981;
+  --color-feedback-warning: #f59e0b;
+  --color-feedback-info: #3b82f6;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+
+  --font-sans:
+    'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:
+    ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  --font-display: Mokoto, 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}

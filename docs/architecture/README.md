@@ -105,7 +105,15 @@ Um ADR deve ser proposto quando uma mudança:
 
 ---
 
-## 5. Regras de Manutenção e Atualização
+## 5. Especificações Arquiteturais de Subsistemas
+
+| Subsistema / Capacidade | Documento Canônico | Escopo Técnico | Status |
+| :--- | :--- | :--- | :--- |
+| **File System Access API & OPFS** | [`file-system-access-architecture.md`](file-system-access-architecture.md) | Confinamento de I/O em `src/platform/file-system/`, pickers, streams atômicos, ciclo de vida de permissões persistentes e governança QG-FS-01 a QG-FS-04. | **Homologado (Fase de Infraestrutura)** |
+
+---
+
+## 6. Regras de Manutenção e Atualização
 
 1. **Imutabilidade Histórica:** ADRs aprovados e homologados não são editados retroativamente para alterar o sentido da decisão original. Caso uma decisão seja superada por nova evolução técnica, emite-se um novo ADR com estado `Superado por ADR-YYY` e o novo ADR referencia `Substitui ADR-XXX`.
 2. **Autoridade do Architect:** Qualquer proposição de ADR exige chancela técnica do papel `Architect`.

@@ -47,6 +47,7 @@ flowchart TD
 | :---: | :---: | :--- | :---: | :--- |
 | **M0** | H0 | [`H0-INITIALIZATION.md`](H0-INITIALIZATION.md) | **Histórico** | Especificação fundacional de setup, tooling e segurança inicial do repositório. |
 | **M3-P1** | Bloco 1 | [`M3-PHASE-1-BLOCO-1.md`](M3-PHASE-1-BLOCO-1.md) | **Ativo** | Estruturação física dos entrypoints WXT, bootstrap React 19 e casca visual do Side Panel. |
+| **Dev** | Setup | [`LOCAL-ENVIRONMENT.md`](LOCAL-ENVIRONMENT.md) | **Ativo** | Automação do ambiente local de desenvolvimento com `npm run dev`, WXT, web-ext e Chrome. |
 
 ---
 

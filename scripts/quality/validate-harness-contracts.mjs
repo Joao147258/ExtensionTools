@@ -38,10 +38,11 @@ export const CANONICAL_AGENTS = [
   'documentation-engineer',
   'script-engineer',
   'release-engineer',
+  'file-system-engineer',
 ];
 
 /**
- * Lista das 9 skills canônicas homologadas no ecossistema do Harness.
+ * Lista das skills canônicas homologadas no ecossistema do Harness.
  */
 export const CANONICAL_SKILLS = [
   'implementation',
@@ -53,6 +54,7 @@ export const CANONICAL_SKILLS = [
   'documentation',
   'script-development',
   'release-validation',
+  'file-system-access',
 ];
 
 /**
