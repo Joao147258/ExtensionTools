@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "policy": "REPOSITORY_SAFETY",
+  "defaultClassification": "RESTRICTED",
+  "classifications": ["PUBLIC", "PRIVATE", "RESTRICTED"],
+  "rules": {
+    "publicDirectories": [
+      "docs",
+      ".harness",
+      ".gemini",
+      "scripts",
+      "src",
+      "tests",
+      "public",
+      ".github"
+    ],
+    "prohibitedDirectories": [
+      ".local",
+      "docs/reports",
+      "reports",
+      "private",
+      "confidential",
+      "notes",
+      "internal",
+      "backup",
+      "backups",
+      "secrets"
+    ],
+    "privateMarkdownSuffixes": [".private.md", ".local.md", ".internal.md", ".confidential.md"],
+    "confidentialityMarkers": [
+      "CONFIDENTIAL",
+      "INTERNAL USE ONLY",
+      "RESTRICTED DISTRIBUTION",
+      "STRICTLY PRIVATE",
+      "DO NOT COMMIT",
+      "SECRET KEY",
+      "PRIVATE KEY"
+    ],
+    "prohibitedFilePatterns": [
+      "\\.env($|\\..+)",
+      "\\.(pem|key|cert|crt|pfx|p12)$",
+      "\\.(bak|backup|dump|sql|sqlite|db)$",
+      "\\.(zip|tar|gz|7z|rar)$",
+      "^id_rsa($|\\..+)",
+      "^id_ed25519($|\\..+)"
+    ],
+    "allowedFileExceptions": ["^\\.env\\.example$", "^tests/.+/fixtures/.+\\.(xml|json|csv)$"],
+    "secretsPatterns": [
+      {
+        "name": "Generic Private Key",
+        "regex": "-----BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----"
+      },
+      {
+        "name": "AWS Access Key ID",
+        "regex": "\\bAKIA[0-9A-Z]{16}\\b"
+      },
+      {
+        "name": "GitHub Token",
+        "regex": "\\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9_]{36,255}\\b"
+      },
+      {
+        "name": "Generic API Key Assignment",
+        "regex": "(api[_-]?key|access[_-]?token|secret[_-]?key|client[_-]?secret)\\s*[:=]\\s*['\"][A-Za-z0-9_\\-]{16,}['\"]",
+        "flags": "i"
+      }
+    ],
+    "privatePathPatterns": [
+      "/home/[a-zA-Z0-9._-]+/",
+      "C:\\\\Users\\\\[a-zA-Z0-9._-]+\\\\",
+      "/Users/[a-zA-Z0-9._-]+/"
+    ],
+    "privatePathExceptions": ["/home/runner/work/"]
+  },
+  "failurePolicy": "BLOCK_ON_ANY_ERROR"
+}

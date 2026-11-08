@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Configuração canônica de descoberta de skills do ExtensionTools para o runtime Antigravity",
+  "entries": [
+    {
+      "path": ".harness/skills"
+    }
+  ]
+}

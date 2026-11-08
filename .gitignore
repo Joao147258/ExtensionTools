@@ -1,0 +1,107 @@
+# ExtensionTools — .gitignore
+# Governança de repositório público e prevenção contra vazamento de segredos/arquivos privados.
+
+# ==============================================================================
+# 1. Configurações privadas, notas e isolamento local (CRITICAL / SENSITIVE)
+# ==============================================================================
+.local/
+.local/**
+*.local
+*.local.*
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+*.bak
+*.backup
+*.dump
+*.sql
+*.sqlite
+*.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==============================================================================
+# 2. Arquivos Markdown e Documentos Privados/Restritos
+# ==============================================================================
+GEMINI.md
+*.private.md
+*.local.md
+*.internal.md
+*.confidential.md
+private/
+confidential/
+notes/
+internal/
+
+# ==============================================================================
+# 3. Dependências e caches de ferramentas
+# ==============================================================================
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+.turbo/
+.cache/
+.parcel-cache/
+
+# ==============================================================================
+# 4. Artefatos de compilação e build (WXT / TypeScript / Bundlers)
+# ==============================================================================
+.output/
+.wxt/
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ==============================================================================
+# 5. Relatórios de testes, cobertura e relatórios de engenharia
+# ==============================================================================
+coverage/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+docs/reports/
+docs/Relatorios/
+reports/
+
+# ==============================================================================
+# 6. Arquivos de sistema operacional e IDEs
+# ==============================================================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ==============================================================================
+# 7. Documentos externos e binários sensíveis não revisados
+# (Permite apenas fixtures sintéticas específicas em tests/fixtures/)
+# ==============================================================================
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+*.pdf
+*.xml
+*.csv
+*.xlsx
+*.xls
+!tests/**/fixtures/**/*.xml
+!tests/**/fixtures/**/*.json
+!tests/**/fixtures/**/*.csv

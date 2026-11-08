@@ -1,0 +1,1 @@
+../../.harness/agents/security-auditor.md

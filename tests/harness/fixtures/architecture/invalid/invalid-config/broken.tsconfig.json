@@ -1,0 +1,5 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./valid/*"
+    // Falha de fechamento de colchetes e chaves (JSON inválido)

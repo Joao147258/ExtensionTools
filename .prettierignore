@@ -1,0 +1,9 @@
+node_modules
+.output
+.wxt
+dist
+coverage
+.local
+pnpm-lock.yaml
+tests/harness/fixtures/
+*.md

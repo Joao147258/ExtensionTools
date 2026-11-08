@@ -1,0 +1,48 @@
+name: Security Guard & Quality CI
+
+on:
+  push:
+    branches: [main, master, 'feat/**', 'fix/**']
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  security-and-quality:
+    name: Security Scanners & Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.16.1
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate Public Safety Configuration
+        run: node -e 'import("./scripts/security/config-loader.mjs").then(m => m.loadSafetyConfig())'
+
+      - name: Run Security Scanners on Tracked Files
+        run: node scripts/security/publication-guard.mjs all
+
+      - name: Run Harness Security Unit Tests
+        run: pnpm run test:security
+
+      - name: Run Static Typecheck
+        run: pnpm run compile
+
+      - name: Run Linter
+        run: pnpm run lint
+
+      - name: Check Code Formatting
+        run: pnpm run format:check

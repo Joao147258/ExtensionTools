@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# ExtensionTools — Git Pre-Push Hook (Security & Architecture Boundaries)
+set -e
+
+echo "🔒 [ExtensionTools Hook] Executing Pre-Push Security Guard (QG-01)..."
+node scripts/security/publication-guard.mjs outgoing
+
+echo "📐 [ExtensionTools Hook] Executing Architecture Boundary Linter (QG-02)..."
+node scripts/architecture/boundary-linter.mjs
+

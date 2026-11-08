@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# ExtensionTools — Git Pre-Commit Hook (Security & Architecture Boundaries)
+set -e
+
+echo "🔒 [ExtensionTools Hook] Executing Pre-Commit Security Guard (QG-01)..."
+node scripts/security/publication-guard.mjs staged
+
+# Verifica se há arquivos de código TypeScript/JavaScript modificados no índice (staged)
+STAGED_CODE_FILES=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null | grep -E '\.(ts|tsx|js|jsx|mjs|cjs)$' || true)
+
+if [ -n "$STAGED_CODE_FILES" ]; then
+  echo "📐 [ExtensionTools Hook] Code changes detected in index. Executing Architecture Boundary Linter (QG-02)..."
+  # Executa verificação para garantir conformidade de limites e prevenção de ciclos
+  node scripts/architecture/boundary-linter.mjs
+fi
+

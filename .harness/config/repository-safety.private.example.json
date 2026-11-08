@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "note": "Modelo sintético de configuração privada para uso em .local/repository-safety.private.json (não versionado)",
+  "forbiddenReferences": ["SENSITIVE_CORP_IDENTIFIER_EXAMPLE_1", "INTERNAL_SYSTEM_CODE_EXAMPLE_2"],
+  "additionalPrivatePaths": [],
+  "additionalSensitiveKeywords": []
+}
