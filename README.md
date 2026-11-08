@@ -2,7 +2,9 @@
 
 > **Extensão modular de produtividade local-first para navegadores**  
 > **Classificação:** Repositório Público  
-> **Status:** Fase H0 — Foundation & Repository Safety  
+> **Status:** Milestone M3 — Product Shell & Platform Foundation (Blocos 0, 1, 2 e 3 Homologados; Bloco 4 Desbloqueado)  
+> **Arquitetura Canônica:** [`ARCHITECTURE.md`](ARCHITECTURE.md) | [`DESIGN.md`](DESIGN.md)  
+> **Acompanhamento e Roadmap:** [`status.md`](status.md)  
 > **Arquitetura do Harness:** [`docs/architecture/HARNESS-ARCHITECTURE.md`](docs/architecture/HARNESS-ARCHITECTURE.md)  
 > **Visão Geral do Produto:** [`docs/product/PRODUCT-OVERVIEW.md`](docs/product/PRODUCT-OVERVIEW.md)  
 > **Governança:** [`AGENTS.md`](AGENTS.md) | [`GEMINI.md`](GEMINI.md)
@@ -38,35 +40,45 @@ O produto planeja disponibilizar os seguintes módulos de produtividade:
 - **Evidence Capture** (registro local e auditável de evidências)
 
 > [!NOTE]  
-> Estes módulos representam o roadmap planejado do produto. Na fase atual (**H0**), nenhuma funcionalidade ou interface gráfica está implementada.
+> Estes módulos representam o catálogo planejado do produto. A implementação das features inicia-se a partir de M4 (piloto `text-diff`), operando sobre a casca e a plataforma desenvolvidas e validadas em M3.
 
 ---
 
-## 3. Stack Tecnológica Inicial
+## 3. Stack Tecnológica
 
-- **Framework de Extensão**: [WXT](https://wxt.dev/) (Web Extension Tools) com Manifest V3
+- **Framework de Extensão**: [WXT](https://wxt.dev/) 0.21.5 (Web Extension Tools) com Manifest V3
 - **Linguagem**: TypeScript (Configuração estrita e moderna)
 - **Interface**: React 19 + React DOM
-- **Estilização**: Tailwind CSS v4
-- **Testes**: Vitest (Unitários/Integração) e Playwright (E2E)
+- **Estilização**: Tailwind CSS v4 (@tailwindcss/vite)
+- **Testes**: Vitest 5 (Unitários/Integração) e Playwright (E2E)
 - **Gerenciador de Pacotes**: pnpm (v12+)
 - **Qualidade de Código**: ESLint 10 + Prettier 3
+- **Governança Arquitetural**: Boundary Linter via AST TypeScript (`scripts/architecture/boundary-linter.mjs`)
 
 ---
 
-## 4. Estado Atual: Fase H0 — Foundation & Repository Safety
+## 4. Estado Atual do Desenvolvimento: M3 — Product Shell & Platform Foundation
 
-O projeto encerrou a etapa de fundação estrutural:
+O projeto concluiu integralmente os marcos **M0 (Foundation)**, **M1 (Architecture & Design)** e **M2 (Harness Engineering & Governance)**, encontrando-se atualmente no marco **M3 (Product Shell & Platform Foundation)** com **4 blocos homologados**:
 
-- [x] Estrutura hierárquica de diretórios (aplicação, harness, testes, documentação) estabelecida.
-- [x] Ferramentas e dependências fundamentais instaladas via `pnpm`.
-- [x] Definições canônicas dos 9 agentes de engenharia extraídas e organizadas em `.harness/agents/`.
-- [x] Controles de Git e `.gitignore` restritivos configurados contra vazamento de credenciais e arquivos privados.
-- [x] Isolamento de diretórios privados (`.local/`).
-- [ ] *(Próximas Fases)* Implementação dos entrypoints da extensão, scripts do harness e módulos funcionais.
+- [x] **M0 — Foundation & Repository Safety:** Scaffolding inicial, isolamento de segredos e políticas git.
+- [x] **M1 — Architecture & Design:** Especificações canônicas em `ARCHITECTURE.md` e `DESIGN.md`.
+- [x] **M2 — Harness Engineering:** 9 skills canônicas, contratos formais, 10 políticas, scanners ESM e Boundary Linter AST (155 testes aprovados).
+- [x] **M3 / Bloco 0 — Preparação & Baseline:** Diagnóstico de compilação WXT/React 19.
+- [x] **M3 / Bloco 1 — WXT & Side Panel Shell:** Entrypoints Manifest V3, Composition Root `SidePanelApp`, `WorkspaceShell`, `ToolNavigation` acessível e `tokens.css`.
+- [x] **M3 / Bloco 2 — Design System Primitivo:** Componentes atômicos acessíveis (`Button`, `Input`, `Select`, `Panel`, `Badge`, `Icon`) em `src/shared/ui/` com contraste WCAG 2.1 AA auditado.
+- [x] **M3 / Bloco 3 — Platform Messaging:** Barramento fortemente tipado entre Side Panel e Background, Inversão de Dependências (`MessageTransport`), runtime validation, timeout local, roteador com autorização `SenderInfo` e operação `platform.ping` (homologado com reservas documentadas).
+- [ ] **M3 / Bloco 4 — Platform Persistence & Storage:** *(Desbloqueado / Pronto para Início)* Contratos de armazenamento e adaptadores `chrome.storage.local`.
+- [ ] **M3 / Bloco 5 — Integração & Homologação:** Validação integrada final e transição para M4.
+
+### Métricas de Qualidade Atuais
+- **499 testes automatizados aprovados no Vitest** (100% de sucesso em 50 arquivos).
+- **0 violações de limites modulares** verificadas pelo Boundary Linter em 62 arquivos e 166 dependências (`QG-02`).
+- **0 segredos ou caminhos privados** detectados pelo Guardião de Publicação (`QG-01`).
+- **Build de produção limpo** gerando bundle Chrome MV3 em ~600 ms (`.output/chrome-mv3/`).
 
 > [!WARNING]  
-> **Publicação Bloqueada**: A publicação no GitHub permanece bloqueada até a conclusão e homologação dos scanners de segurança (secrets, referências proibidas e integridade de repositório) nas fases posteriores do harness.
+> **Publicação Bloqueada (Safe-by-Default):** A publicação externa no GitHub permanece bloqueada até a conclusão e homologação formal de todos os Quality Gates de release no Milestone M8. Todos os dados utilizados em testes são estritamente sintéticos.
 
 ---
 

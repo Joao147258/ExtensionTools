@@ -102,6 +102,7 @@ Um ADR deve ser proposto quando uma mudança:
 | **ADR-003** | Processamento Local-First e Privacidade Absoluta | **Homologado** | Produto / Segurança | M1 | [`adr/ADR-003-processamento-local-first.md`](adr/ADR-003-processamento-local-first.md) |
 | **ADR-004** | Verificação Mecânica de Fronteiras via Boundary Linter AST | **Homologado** | Harness / Governança | M2 (H4) | [`adr/ADR-004-boundary-linter-ast.md`](adr/ADR-004-boundary-linter-ast.md) |
 | **ADR-005** | Composição do Side Panel Shell e Navegação Desacoplada | **Homologado** | Produto / Shell M3 | M3 (Bloco 1) | [`adr/ADR-005-composicao-sidepanel-shell-navegacao.md`](adr/ADR-005-composicao-sidepanel-shell-navegacao.md) |
+| **ADR-006** | Plataforma de Mensageria: Inversão de Dependências e Validação em Runtime | **Homologado** | Plataforma / Mensageria | M3 (Bloco 3) | [`adr/ADR-006-platform-messaging-ports-adapters.md`](adr/ADR-006-platform-messaging-ports-adapters.md) |
 
 ---
 
@@ -109,6 +110,7 @@ Um ADR deve ser proposto quando uma mudança:
 
 | Subsistema / Capacidade | Documento Canônico | Escopo Técnico | Status |
 | :--- | :--- | :--- | :--- |
+| **Platform Messaging** | [`platform-messaging.md`](platform-messaging.md) | Barramento fortemente tipado entre Side Panel e Background, inversão de dependências (DIP), runtime validation, timeout local e autorização SenderInfo. | **Homologado com Reservas (M3 / Bloco 3)** |
 | **File System Access API & OPFS** | [`file-system-access-architecture.md`](file-system-access-architecture.md) | Confinamento de I/O em `src/platform/file-system/`, pickers, streams atômicos, ciclo de vida de permissões persistentes e governança QG-FS-01 a QG-FS-04. | **Homologado (Fase de Infraestrutura)** |
 
 ---

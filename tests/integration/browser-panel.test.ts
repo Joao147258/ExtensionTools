@@ -17,6 +17,13 @@ import { browser } from 'wxt/browser';
 
 vi.mock('wxt/browser', () => ({
   browser: {
+    runtime: {
+      id: 'test-extension-id',
+      onMessage: {
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      },
+    },
     sidePanel: {
       setPanelBehavior: vi.fn(),
     },

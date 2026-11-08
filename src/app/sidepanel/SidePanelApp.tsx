@@ -31,6 +31,7 @@ import {
   getToolDescriptor,
   type ToolId,
 } from './tool-catalog';
+import { MessagingDiagnostic } from './components/MessagingDiagnostic';
 
 /**
  * Ponto central de composição da interface do Side Panel.
@@ -76,15 +77,18 @@ export function SidePanelApp() {
     >
       {/* key={activeToolId} garante montagem e reset limpo do Error Boundary na troca de ferramenta */}
       <RenderErrorBoundary key={activeToolId}>
-        <ToolPlaceholder
-          name={activeTool.label}
-          description={activeTool.description}
-          message={
-            activeTool.id === 'text-diff'
-              ? 'Funcionalidade piloto em desenvolvimento (M4).'
-              : 'Funcionalidade planejada para o Bloco A de Features (M5).'
-          }
-        />
+        <div className="flex flex-col items-center gap-4">
+          <ToolPlaceholder
+            name={activeTool.label}
+            description={activeTool.description}
+            message={
+              activeTool.id === 'text-diff'
+                ? 'Funcionalidade piloto em desenvolvimento (M4).'
+                : 'Funcionalidade planejada para o Bloco A de Features (M5).'
+            }
+          />
+          <MessagingDiagnostic />
+        </div>
       </RenderErrorBoundary>
     </WorkspaceShell>
   );

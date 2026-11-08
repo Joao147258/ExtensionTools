@@ -88,9 +88,9 @@ As 12 features previstas:
 ### 3.3. Platform (`src/platform/`)
 Fornece abstrações e implementações de infraestrutura técnica transversais ao navegador e ao sistema operacional:
 - `browser/`: Wrappers seguros e tipados para as APIs do Chrome/WebExtension (`tabs`, `windows`, `permissions`).
-- `file-system/`: Integração local via File System Access API ou downloads nativos.
+- `file-system/`: Integração local via File System Access API ou downloads nativos ([especificação detalhada](docs/architecture/file-system-access-architecture.md)).
 - `persistence/`: Mecanismos de armazenamento local (IndexedDB via Dexie/idb e `chrome.storage.local`).
-- `messaging/`: Barramento de mensagens fortemente tipadas entre Background, Content Script e Side Panel.
+- `messaging/`: Barramento de mensagens fortemente tipadas entre Background e Side Panel com Inversão de Dependências (DIP), Runtime Validation e autorização `SenderInfo` ([especificação canônica](docs/architecture/platform-messaging.md) e [`ADR-006`](docs/architecture/adr/ADR-006-platform-messaging-ports-adapters.md)).
 
 ### 3.4. Shared (`src/shared/`)
 Elementos genuinamente reutilizáveis em múltiplos módulos:
@@ -162,7 +162,92 @@ flowchart TD
 
 ---
 
-## 5. Regras de Dependência e Matriz de Fronteiras
+## 5. Subsistema de Mensageria da Plataforma (Platform Messaging)
+
+O subsistema de mensageria da plataforma (`src/platform/messaging/`) é o barramento de comunicação bidirecional fortemente tipado que conecta os processos isolados do navegador (Side Panel e Background Service Worker) sob o paradigma **Manifest V3**.
+
+> [!NOTE]  
+> A documentação canônica exaustiva do subsistema, detalhando contratos, validadores, códigos de erro e guia de implementação, reside em [`docs/architecture/platform-messaging.md`](docs/architecture/platform-messaging.md). A formalização da decisão reside em [`ADR-006`](docs/architecture/adr/ADR-006-platform-messaging-ports-adapters.md).
+
+### 5.1. Contextos de Execução e Fronteiras de Confiança
+
+1. **Side Panel (`src/entrypoints/sidepanel/`):** Contexto persistente de UI com React 19. Não possui acesso direto ao ciclo de vida do navegador ou a APIs privilegiadas exclusivas de background.
+2. **Background Service Worker (`src/entrypoints/background/`):** Contexto *headless*, estritamente *stateless* e efêmero. O Chromium encerra o processo após ~30 segundos de inatividade e o reinicia sob demanda. O roteador de background não pode depender de estado mutável em memória global.
+3. **Fronteira de Confiança (IPC Boundary):** Dados transmitidos via `chrome.runtime.sendMessage` cruzam a fronteira do processo e chegam ao destino como `unknown`. O protocolo impõe validação estrita em runtime antes de qualquer processamento.
+
+### 5.2. Arquitetura Implementada vs. Arquitetura Planejada
+
+| Dimensão | Arquitetura Implementada (M3 / Bloco 3) | Arquitetura Planejada (Fases Futuras) |
+|---|---|---|
+| **Modelo de Transporte** | Solicitação e resposta pontual (*one-off request-response*) via `browser.runtime.sendMessage`. | Portas de longa duração (*long-lived connections*) e streaming contínuo para arquivos pesados. |
+| **Abstração (DIP)** | Interface `MessageTransport` desacoplada; cliente agnóstico em relação a APIs de browser. | Adaptadores alternativos para comunicação com workers dedicados e WebLocks. |
+| **Runtime Validation** | Type Guards funcionais puros (`isRecord`, `isProtocolMessage`, `isRequestMessage`, `isReplyFor`). | Esquemas declarativos com validação automatizada de payloads complexos de domínio. |
+| **Tratamento de Timeout** | Barreira local de espera com `Promise.race()` sem retentativa automática. | Protocolo de cancelamento cooperativo com tokens de cancelamento (`AbortController`). |
+| **Operações Suportadas** | Operação canônica de verificação de conectividade: `platform.ping`. | Comandos de persistência (M3 / Bloco 4), captura de abas e exportação. |
+| **Autorização** | Verificação obrigatória de `SenderInfo`: `sender.id === extensionId` e `sender.tab == null`. | Políticas granulares de permissão para Content Scripts autorizados em abas específicas. |
+
+### 5.3. Diagrama de Componentes de Mensageria
+
+```mermaid
+flowchart LR
+    subgraph SidePanelContext ["Contexto Side Panel (UI)"]
+        Diagnostic["MessagingDiagnostic (UI)"] --> Service["PlatformHealthService"]
+        Service --> Client["MessagingClient"]
+        Client --> TransportPort["MessageTransport (Port / DIP)"]
+        TransportPort -.-> Adapter["BrowserRuntimeTransport (Adapter)"]
+    end
+
+    subgraph IPC ["Canal IPC do Chromium"]
+        Adapter ==>|browser.runtime.sendMessage| Listener["Background Messaging Listener"]
+        Listener ==>|sendResponse assíncrono| Adapter
+    end
+
+    subgraph BackgroundContext ["Contexto Background Worker (Stateless)"]
+        Listener --> Router["Background Message Router (Puro)"]
+        Router --> Auth["Autorização SenderInfo"]
+        Auth --> Validation["Runtime Type Guards"]
+        Validation --> Handler["Handler: platform.ping"]
+    end
+```
+
+### 5.4. Diagrama de Sequência do Fluxo `platform.ping`
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Usuário
+    participant UI as MessagingDiagnostic
+    participant Svc as PlatformHealthService
+    participant Client as MessagingClient
+    participant Adapter as BrowserRuntimeTransport
+    participant Listener as BackgroundListener
+    participant Router as BackgroundRouter
+    participant Handler as PingHandler
+
+    User->>UI: Clica em "Verificar Conexão"
+    UI->>Svc: check(probeString)
+    Svc->>Client: send("platform.ping", { probe })
+    Client->>Client: Gera ID (UUID v4) + Valida Request
+    Client->>Adapter: send(RequestMessage)
+    Adapter->>Listener: browser.runtime.sendMessage()
+    Note over Listener: Retorna síncrono `true`
+    Listener->>Router: route(rawMessage, senderInfo)
+    Router->>Router: Valida SenderInfo (ID & Tab)
+    Router->>Router: Valida Payload via Type Guards
+    Router->>Handler: Executa Handler("platform.ping")
+    Handler-->>Router: Retorna { alive: true, echo: probe }
+    Router-->>Listener: Retorna MessageReply com ok: true
+    Listener-->>Adapter: sendResponse(MessageReply)
+    Adapter-->>Client: Entrega resposta bruta
+    Client->>Client: Valida isReplyFor(reply, request)
+    Client-->>Svc: Retorna MessageResult ({ ok: true, data })
+    Svc-->>UI: Entrega dados de saúde
+    UI-->>User: Atualiza Badge para "ONLINE (OK)"
+```
+
+---
+
+## 6. Regras de Dependência e Matriz de Fronteiras
 
 ```mermaid
 flowchart LR
@@ -198,7 +283,7 @@ flowchart LR
 
 ---
 
-## 6. Segurança e Superfície de Ataque
+## 7. Segurança e Superfície de Ataque
 
 Sendo um projeto mantido em **repositório público no GitHub**, a arquitetura estabelece as seguintes barreiras:
 
@@ -209,7 +294,7 @@ Sendo um projeto mantido em **repositório público no GitHub**, a arquitetura e
 
 ---
 
-## 7. Estratégia de Testabilidade
+## 8. Estratégia de Testabilidade
 
 A organização Feature-First foi planejada para permitir uma esteira de testes veloz e determinística:
 
@@ -227,7 +312,7 @@ A organização Feature-First foi planejada para permitir uma esteira de testes 
 
 ---
 
-## 8. Governança do Desenvolvimento Assistido por IA
+## 9. Governança do Desenvolvimento Assistido por IA
 
 Para agentes autônomos operando no repositório (Gemini, Claude, GPT, etc.), este documento estabelece as seguintes regras operacionais:
 
@@ -246,7 +331,7 @@ Para agentes autônomos operando no repositório (Gemini, Claude, GPT, etc.), es
 
 ---
 
-## 9. Antipadrões Desencorajados ou Proibidos
+## 10. Antipadrões Desencorajados ou Proibidos
 
 - ❌ **Shared Dump**: Mover arquivos para `src/shared/` simplesmente para resolver um erro de importação sem avaliar coesão.
 - ❌ **Deep Cross-Feature Imports**: Fazer `import { Button } from '@/features/calendar/ui/Button'`.
@@ -256,7 +341,7 @@ Para agentes autônomos operando no repositório (Gemini, Claude, GPT, etc.), es
 
 ---
 
-## 10. Diagrama Arquitetural Consolidado
+## 11. Diagrama Arquitetural Consolidado
 
 ```mermaid
 graph TD
